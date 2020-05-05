@@ -40,6 +40,7 @@ class LinkedList:
 
     # 1.1. Добавьте в класс LinkedList метод удаления одного узла по его значению
     # где флажок all=False по умолчанию -- удаляем только первый нашедшийся элемент.
+    # 1.2. Дополните этот метод удалением всех узлов по конкретному значению (флажок all=True).
     def delete(self, val, all=False):
         # pass # здесь будет ваш код
         if self.head is None:
@@ -50,12 +51,12 @@ class LinkedList:
 
         node = self.head
         previous = None
-
         while node is not None:
             if node.value == val:
                 # print("candidate for del", node.value)
                 previous.next = node.next
-                break
+                if not all:
+                    break
             previous = node
             node = node.next
         return None
@@ -87,5 +88,5 @@ s_list.add_in_tail(Node(777))
 # nf = s_list.find(55)
 # if nf is not None:
 #     print(nf.value)
-nd = s_list.delete(77)
+nd = s_list.delete(77, all=True)
 s_list.print_all_nodes()
