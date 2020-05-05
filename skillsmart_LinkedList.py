@@ -45,12 +45,14 @@ class LinkedList:
         # pass # здесь будет ваш код
         if self.head is None:
             print("LinkedList is empty")
-        elif self.head.value == val:
-            # print("del in head ", self.head.value)
+        elif (self.head.value == val) and not all:
             self.head = self.head.next
+        elif (self.head.value == val) and all:
+            while self.head.value == val:
+                self.head = self.head.next
 
-        node = self.head
-        previous = None
+        node = self.head.next
+        previous = self.head
         while node is not None:
             if node.value == val:
                 # print("candidate for del", node.value)
@@ -75,6 +77,8 @@ n2 = Node(55)
 n1.next = n2 # 12 -> 55
 
 s_list = LinkedList()
+s_list.add_in_tail(Node(77))
+s_list.add_in_tail(Node(77))
 s_list.add_in_tail(n1)
 s_list.add_in_tail(n2)
 s_list.add_in_tail(Node(77))
@@ -83,10 +87,11 @@ s_list.add_in_tail(Node(77))
 s_list.add_in_tail(Node(512))
 s_list.add_in_tail(Node(77))
 s_list.add_in_tail(Node(777))
+s_list.add_in_tail(Node(77))
 # s_list.print_all_nodes()
 
 # nf = s_list.find(55)
 # if nf is not None:
 #     print(nf.value)
-nd = s_list.delete(77, all=True)
+nd = s_list.delete(77, all=False)
 s_list.print_all_nodes()
