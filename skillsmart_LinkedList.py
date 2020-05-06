@@ -36,15 +36,14 @@ class LinkedList:
         return None
     # 1.4. Добавьте в класс LinkedList метод поиска всех узлов по конкретному значению (возвращается стандартный питоновский список найденных узлов).
     def find_all(self, val):
-        
-        []
+        listOfFind = []
         node = self.head
         while node is not None:
             if node.value == val:
-                [].append(node.value)
-                print(node.value)
+                listOfFind.append(node)
+                # print(node.value)
             node = node.next
-        return [] # здесь будет ваш код
+        return listOfFind # здесь будет ваш код
 
     # 1.1. Добавьте в класс LinkedList метод удаления одного узла по его значению
     # где флажок all=False по умолчанию -- удаляем только первый нашедшийся элемент.
@@ -108,5 +107,6 @@ s_list.add_in_tail(Node(77))
 # nd = s_list.delete(77, all=True)
 # nc = s_list.clean()
 nfa = s_list.find_all(77)
-print (nfa)
+for k in nfa:
+    print(k.value, k.next)
 # s_list.print_all_nodes()
