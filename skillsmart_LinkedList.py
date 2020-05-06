@@ -34,13 +34,23 @@ class LinkedList:
                 return node
             node = node.next
         return None
-
+    # 1.4. Добавьте в класс LinkedList метод поиска всех узлов по конкретному значению (возвращается стандартный питоновский список найденных узлов).
     def find_all(self, val):
+        
+        []
+        node = self.head
+        while node is not None:
+            if node.value == val:
+                [].append(node.value)
+                print(node.value)
+            node = node.next
         return [] # здесь будет ваш код
 
     # 1.1. Добавьте в класс LinkedList метод удаления одного узла по его значению
     # где флажок all=False по умолчанию -- удаляем только первый нашедшийся элемент.
     # 1.2. Дополните этот метод удалением всех узлов по конкретному значению (флажок all=True).
+
+    # я так понимаю, для удаления узла из связанного списка требуется заменить саму связь на следующий за удаляемым узел
     def delete(self, val, all=False):
         # pass # здесь будет ваш код
         if self.head is None:
@@ -63,9 +73,11 @@ class LinkedList:
             node = node.next
         return None
 
+    # 1.3. Добавьте в класс LinkedList метод очистки всего содержимого (создание пустого списка) -- clean()
+    # Подозреваю, что достаочно "голову" списка "обнулить"
     def clean(self):
-        pass # здесь будет ваш код
-
+        # pass # здесь будет ваш код
+        self.head = None
     def len(self):
         return 0 # здесь будет ваш код
 
@@ -93,5 +105,8 @@ s_list.add_in_tail(Node(77))
 # nf = s_list.find(55)
 # if nf is not None:
 #     print(nf.value)
-nd = s_list.delete(77, all=False)
-s_list.print_all_nodes()
+# nd = s_list.delete(77, all=True)
+# nc = s_list.clean()
+nfa = s_list.find_all(77)
+print (nfa)
+# s_list.print_all_nodes()
