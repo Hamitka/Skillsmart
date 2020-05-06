@@ -23,9 +23,11 @@ class LinkedList:
 
     def print_all_nodes(self):
         node = self.head
+        print("--------------")
         while node != None:
             print(node.value)
             node = node.next
+
 
     def find(self, val):
         node = self.head
@@ -86,17 +88,32 @@ class LinkedList:
             node = node.next
         return i # здесь будет ваш код
 
+    # 1.6. Добавьте в класс LinkedList метод вставки узла newNode после заданного узла afterNode (из списка)
+    # Если afterNode = None, добавьте новый элемент первым в списке.
     def insert(self, afterNode, newNode):
-        pass # здесь будет ваш код
+        # pass # здесь будет ваш код
+        node = self.head
+        newNODE= Node(newNode)
+        if afterNode is None:
+            newNODE.next = node
+            self.head = newNODE
+        else:
+            while node is not None:
+                if node.value == afterNode:
+                    newNODE.next = node.next
+                    node.next = newNODE
+                    break
+                node = node.next
+        return None
 
 n1 = Node(12)
 n2 = Node(55)
 n1.next = n2 # 12 -> 55
 
 s_list = LinkedList()
-s_list.add_in_tail(Node(77))
-s_list.add_in_tail(Node(77))
+
 s_list.add_in_tail(n1)
+s_list.add_in_tail(Node(77))
 s_list.add_in_tail(n2)
 s_list.add_in_tail(Node(77))
 s_list.add_in_tail(Node(318))
@@ -105,15 +122,49 @@ s_list.add_in_tail(Node(512))
 s_list.add_in_tail(Node(77))
 s_list.add_in_tail(Node(777))
 s_list.add_in_tail(Node(77))
+s_list.add_in_tail(Node(333))
 # s_list.print_all_nodes()
 
 # nFind = s_list.find(55)
 # if nFind is not None:
 #     print(nFind.value)
-# nDel = s_list.delete(77, all=True)
-# nClean = s_list.clean()
-# nFindAll = s_list.find_all(77)
-# for k in nFindAll:
-#     print(k.value, k.next)
-# s_list.print_all_nodes()
-print (s_list.len())
+
+# * 1.7. Напишите проверочные тесты для каждого из предыдущих заданий.
+s_list.print_all_nodes()
+print ("длина списка: ", s_list.len()) #проверяем 1.5: длина списка
+
+nDel = s_list.delete(55, all=False) #проверяем 1.1: удаление одного узла в середине:
+s_list.print_all_nodes()
+print ("длина списка: ", s_list.len()) #проверяем 1.5: длина списка
+
+nDel = s_list.delete(12, all=False) #проверяем 1.1: удаление одного узла в начале:
+s_list.print_all_nodes()
+print ("длина списка: ", s_list.len()) #проверяем 1.5: длина списка
+
+nDel = s_list.delete(333, all=False) #проверяем 1.1: удаление одного узла в конце:
+s_list.print_all_nodes()
+print ("длина списка: ", s_list.len()) #проверяем 1.5: длина списка
+
+nFindAll = s_list.find_all(77) #проверяем 1.4: поиска всех узлов по конкретному значению
+for k in nFindAll:
+    print(k.value, k.next)
+
+nDelAll = s_list.delete(77, all=True) #проверяем 1.2: удаление всех найденных узлов:
+s_list.print_all_nodes()
+print ("длина списка: ", s_list.len()) #проверяем 1.5: длина списка
+
+nInsert = s_list.insert(777, 513) #проверяем 1.6: вставка узла
+s_list.print_all_nodes()
+print ("длина списка: ", s_list.len()) #проверяем 1.5: длина списка
+
+nClean = s_list.clean() #проверяем 1.3: очистка списка:
+s_list.print_all_nodes()
+print ("длина списка: ", s_list.len()) #проверяем 1.5: длина списка
+
+s_list.add_in_tail(Node(88))
+s_list.print_all_nodes()
+print ("длина списка: ", s_list.len()) #проверяем 1.5: длина списка
+
+nInsert = s_list.insert(None, 513) #проверяем 1.6: вставка узла если None
+s_list.print_all_nodes()
+print ("длина списка: ", s_list.len()) #проверяем 1.5: длина списка
