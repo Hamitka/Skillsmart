@@ -77,8 +77,14 @@ class LinkedList:
     def clean(self):
         # pass # здесь будет ваш код
         self.head = None
+    # 1.5. Добавьте в класс LinkedList метод вычисления текущей длины списка -- len()
     def len(self):
-        return 0 # здесь будет ваш код
+        node = self.head
+        i=0
+        while node is not None:
+            i +=1
+            node = node.next
+        return i # здесь будет ваш код
 
     def insert(self, afterNode, newNode):
         pass # здесь будет ваш код
@@ -101,12 +107,13 @@ s_list.add_in_tail(Node(777))
 s_list.add_in_tail(Node(77))
 # s_list.print_all_nodes()
 
-# nf = s_list.find(55)
-# if nf is not None:
-#     print(nf.value)
-# nd = s_list.delete(77, all=True)
-# nc = s_list.clean()
-nfa = s_list.find_all(77)
-for k in nfa:
-    print(k.value, k.next)
+# nFind = s_list.find(55)
+# if nFind is not None:
+#     print(nFind.value)
+# nDel = s_list.delete(77, all=True)
+# nClean = s_list.clean()
+# nFindAll = s_list.find_all(77)
+# for k in nFindAll:
+#     print(k.value, k.next)
 # s_list.print_all_nodes()
+print (s_list.len())
