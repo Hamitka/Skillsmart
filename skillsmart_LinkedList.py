@@ -27,7 +27,7 @@ class LinkedList:
         while node != None:
             print(node.value)
             node = node.next
-
+        print("--------------")
 
     def find(self, val):
         node = self.head
@@ -39,12 +39,15 @@ class LinkedList:
     # 1.4. Добавьте в класс LinkedList метод поиска всех узлов по конкретному значению (возвращается стандартный питоновский список найденных узлов).
     def find_all(self, val):
         listOfFind = []
-        node = self.head
-        while node is not None:
-            if node.value == val:
-                listOfFind.append(node)
-                # print(node.value)
-            node = node.next
+        if self.head is None:
+            print("LinkedList is empty")
+        else:
+            node = self.head
+            while node is not None:
+                if node.value == val:
+                    listOfFind.append(node)
+                    # print(node.value)
+                node = node.next
         return listOfFind # здесь будет ваш код
 
     # 1.1. Добавьте в класс LinkedList метод удаления одного узла по его значению
@@ -54,31 +57,44 @@ class LinkedList:
     # я так понимаю, для удаления узла из связанного списка требуется заменить саму связь на следующий за удаляемым узел
     def delete(self, val, all=False):
         # pass # здесь будет ваш код
+        print ("попытка удалить элемент")
+        i=0
         if self.head is None:
             print("LinkedList is empty")
+            i = -1
         elif (self.head.value == val) and not all:
             self.head = self.head.next
+            i+=1
         elif (self.head.value == val) and all:
             while self.head.value == val:
                 self.head = self.head.next
+                i += 1
+        else:
+            node = self.head.next
+            previous = self.head
 
-        node = self.head.next
-        previous = self.head
-        while node is not None:
-            if node.value == val:
-                # print("candidate for del", node.value)
-                previous.next = node.next
-                if not all:
-                    break
-            previous = node
-            node = node.next
+            while node is not None:
+                if node.value == val:
+                    # print("candidate for del", node.value)
+                    previous.next = node.next
+                    i+=1
+                    if not all:
+                        break
+                previous = node
+                node = node.next
+        if i==0:
+            print ("this value is not in LinkedList")
         return None
 
     # 1.3. Добавьте в класс LinkedList метод очистки всего содержимого (создание пустого списка) -- clean()
     # Подозреваю, что достаочно "голову" списка "обнулить"
     def clean(self):
         # pass # здесь будет ваш код
-        self.head = None
+        if self.head is None:
+            print("LinkedList is already empty")
+        else:
+            print ("LinkedList is cleared")
+            self.head = None
     # 1.5. Добавьте в класс LinkedList метод вычисления текущей длины списка -- len()
     def len(self):
         node = self.head
@@ -130,8 +146,13 @@ s_list.add_in_tail(Node(333))
 #     print(nFind.value)
 
 # * 1.7. Напишите проверочные тесты для каждого из предыдущих заданий.
+print ("изначальный список:")
 s_list.print_all_nodes()
 print ("длина списка: ", s_list.len()) #проверяем 1.5: длина списка
+
+# nClean = s_list.clean() #проверяем 1.3: очистка списка:
+# s_list.print_all_nodes()
+# print ("длина списка: ", s_list.len()) #проверяем 1.5: длина списка
 
 nDel = s_list.delete(55, all=False) #проверяем 1.1: удаление одного узла в середине:
 s_list.print_all_nodes()
@@ -168,3 +189,49 @@ print ("длина списка: ", s_list.len()) #проверяем 1.5: дл�
 nInsert = s_list.insert(None, 513) #проверяем 1.6: вставка узла если None
 s_list.print_all_nodes()
 print ("длина списка: ", s_list.len()) #проверяем 1.5: длина списка
+
+
+# * 1.8. Напишите функцию, которая получает на вход два связанных списка, состоящие из целых значений,
+# и если их длины равны, возвращает список, каждый элемент которого равен сумме соответствующих элементов входных списков.
+
+def sum_of_two_linkedlist(lList1, lList2):
+    sumOfList = LinkedList()
+    node1=lList1.head
+    node2=lList2.head
+    while (node1 is not None) and (node2 is not None):
+        # print (node1.value, "+", node2.value)
+        sumOfList.add_in_tail(Node(node1.value+node2.value))
+        node1 = node1.next
+        node2 = node2.next
+    # print (lList1.len())
+    # print (lList2.len())
+    if lList1.len()==lList2.len():
+        print("len is same")
+    else:
+        print("len is NOT same")
+        return None
+    # print (sumTwoList.print_all_nodes())
+    return sumOfList
+
+print ("par.1.8:")
+my_list1 = LinkedList()
+my_list1.add_in_tail(Node(11))
+my_list1.add_in_tail(Node(22))
+my_list1.add_in_tail(Node(33))
+my_list2 = LinkedList()
+my_list2.add_in_tail(Node(44))
+my_list2.add_in_tail(Node(55))
+my_list2.add_in_tail(Node(66))
+# my_list2.add_in_tail(Node(77))
+
+
+# в случае, если списки не равны, наверное, требуется ловить исключения для подобного теста:
+# но в целом условия задачи выполнены
+print ("lList1: ")
+my_list1.print_all_nodes()
+print ("lList2: ")
+my_list2.print_all_nodes()
+
+sumTwoList = sum_of_two_linkedlist(my_list1, my_list2)
+print ("sum of two lList:")
+sumTwoList.print_all_nodes()
