@@ -123,83 +123,6 @@ class LinkedList:
                 node = node.next
         return None
 
-n1 = Node(12)
-n2 = Node(55)
-n1.next = n2 # 12 -> 55
-
-s_list = LinkedList()
-
-s_list.add_in_tail(Node(77))
-s_list.add_in_tail(Node(77))
-s_list.add_in_tail(Node(55))
-s_list.add_in_tail(n1)
-s_list.add_in_tail(Node(77))
-s_list.add_in_tail(n2)
-s_list.add_in_tail(Node(77))
-s_list.add_in_tail(Node(318))
-s_list.add_in_tail(Node(77))
-s_list.add_in_tail(Node(512))
-s_list.add_in_tail(Node(77))
-s_list.add_in_tail(Node(777))
-s_list.add_in_tail(Node(77))
-s_list.add_in_tail(Node(333))
-# s_list.print_all_nodes()
-
-# nFind = s_list.find(55)
-# if nFind is not None:
-#     print(nFind.value)
-
-# * 1.7. Напишите проверочные тесты для каждого из предыдущих заданий.
-# print ("изначальный список:")
-s_list.print_all_nodes()
-# print ("длина списка: ", s_list.len()) #проверяем 1.5: длина списка
-
-# nClean = s_list.clean() #проверяем 1.3: очистка списка:
-# s_list.print_all_nodes()
-# print ("длина списка: ", s_list.len()) #проверяем 1.5: длина списка
-
-nDel = s_list.delete(55, all=False) #проверяем 1.1: удаление одного узла в середине:
-s_list.print_all_nodes()
-# print ("↑ должны были удалить 55 из списка один раз, длина списка: ", s_list.len()) #проверяем 1.5: длина списка
-
-nDel = s_list.delete(77, all=False) #проверяем 1.1: удаление одного узла в начале:
-s_list.print_all_nodes()
-# print ("↑ должны были удалить 77 (первый) из списка один раз, длина списка: ", s_list.len()) #проверяем 1.5: длина списка
-
-nDel = s_list.delete(333, all=False) #проверяем 1.1: удаление одного узла в конце:
-s_list.print_all_nodes()
-# print ("↑ должны были удалить 333 (последний) из списка один раз, длина списка: ", s_list.len()) #проверяем 1.5: длина списка
-
-nDel = s_list.delete(8888, all=False) #проверяем 1.1: попытка удаление одного узла не из списка:
-s_list.print_all_nodes()
-# print ("↑ должны были удалить 8888 (нет такого) из списка один раз, длина списка: ", s_list.len()) #проверяем 1.5: длина списка
-
-nFindAll = s_list.find_all(77) #проверяем 1.4: поиска всех узлов по конкретному значению
-for k in nFindAll:
-    print(k.value, k.next)
-# print ("↑ попытка найти все узлы и сделать обычный список")
-
-nDelAll = s_list.delete(77, all=True) #проверяем 1.2: удаление всех найденных узлов:
-s_list.print_all_nodes()
-# print ("↑ должны были удалить 77 из списка все, длина списка: ", s_list.len()) #проверяем 1.5: длина списка
-
-nInsert = s_list.insert(777, 513) #проверяем 1.6: вставка узла
-s_list.print_all_nodes()
-# print ("↑ должны были вставить 513 после 777, длина списка: ", s_list.len()) #проверяем 1.5: длина списка
-
-nClean = s_list.clean() #проверяем 1.3: очистка списка:
-s_list.print_all_nodes()
-# print ("↑ должны были очистить список, длина списка: ", s_list.len()) #проверяем 1.5: длина списка
-
-s_list.add_in_tail(Node(88))
-s_list.print_all_nodes()
-# print ("↑ должны были добавить 88 в конец списка, длина списка: ", s_list.len()) #проверяем 1.5: длина списка
-
-nInsert = s_list.insert(None, 515) #проверяем 1.6: вставка узла если None
-s_list.print_all_nodes()
-# print ("↑ должны были добавить 515 в начало списка, длина списка: ", s_list.len()) #проверяем 1.5: длина списка
-
-
 # * 1.8. Напишите функцию, которая получает на вход два связанных списка, состоящие из целых значений,
 # и если их длины равны, возвращает список, каждый элемент которого равен сумме соответствующих элементов входных списков.
 
@@ -222,25 +145,104 @@ def sum_of_two_linkedlist(lList1, lList2):
     # print (sumTwoList.print_all_nodes())
     return sumOfList
 
-# print ("par.1.8:")
-my_list1 = LinkedList()
-my_list1.add_in_tail(Node(11))
-my_list1.add_in_tail(Node(22))
-my_list1.add_in_tail(Node(33))
-my_list2 = LinkedList()
-my_list2.add_in_tail(Node(44))
-my_list2.add_in_tail(Node(55))
-my_list2.add_in_tail(Node(66))
-# my_list2.add_in_tail(Node(77))
-
-
-# в случае, если списки не равны, наверное, требуется ловить исключения для подобного теста:
-# но в целом условия задачи выполнены
-print ("lList1: ")
-my_list1.print_all_nodes()
-print ("lList2: ")
-my_list2.print_all_nodes()
-
-sumTwoList = sum_of_two_linkedlist(my_list1, my_list2)
-print ("sum of two lList:")
-sumTwoList.print_all_nodes()
+# n1 = Node(12)
+# n2 = Node(55)
+# n1.next = n2 # 12 -> 55
+#
+# s_list = LinkedList()
+#
+# s_list.add_in_tail(Node(77))
+# s_list.add_in_tail(Node(77))
+# s_list.add_in_tail(Node(55))
+# s_list.add_in_tail(n1)
+# s_list.add_in_tail(Node(77))
+# s_list.add_in_tail(n2)
+# s_list.add_in_tail(Node(77))
+# s_list.add_in_tail(Node(318))
+# s_list.add_in_tail(Node(77))
+# s_list.add_in_tail(Node(512))
+# s_list.add_in_tail(Node(77))
+# s_list.add_in_tail(Node(777))
+# s_list.add_in_tail(Node(77))
+# s_list.add_in_tail(Node(333))
+# # s_list.print_all_nodes()
+#
+# # nFind = s_list.find(55)
+# # if nFind is not None:
+# #     print(nFind.value)
+#
+# # * 1.7. Напишите проверочные тесты для каждого из предыдущих заданий.
+# # print ("изначальный список:")
+# s_list.print_all_nodes()
+# # print ("длина списка: ", s_list.len()) #проверяем 1.5: длина списка
+#
+# # nClean = s_list.clean() #проверяем 1.3: очистка списка:
+# # s_list.print_all_nodes()
+# # print ("длина списка: ", s_list.len()) #проверяем 1.5: длина списка
+#
+# nDel = s_list.delete(55, all=False) #проверяем 1.1: удаление одного узла в середине:
+# s_list.print_all_nodes()
+# # print ("↑ должны были удалить 55 из списка один раз, длина списка: ", s_list.len()) #проверяем 1.5: длина списка
+#
+# nDel = s_list.delete(77, all=False) #проверяем 1.1: удаление одного узла в начале:
+# s_list.print_all_nodes()
+# # print ("↑ должны были удалить 77 (первый) из списка один раз, длина списка: ", s_list.len()) #проверяем 1.5: длина списка
+#
+# nDel = s_list.delete(333, all=False) #проверяем 1.1: удаление одного узла в конце:
+# s_list.print_all_nodes()
+# # print ("↑ должны были удалить 333 (последний) из списка один раз, длина списка: ", s_list.len()) #проверяем 1.5: длина списка
+#
+# nDel = s_list.delete(8888, all=False) #проверяем 1.1: попытка удаление одного узла не из списка:
+# s_list.print_all_nodes()
+# # print ("↑ должны были удалить 8888 (нет такого) из списка один раз, длина списка: ", s_list.len()) #проверяем 1.5: длина списка
+#
+# nFindAll = s_list.find_all(77) #проверяем 1.4: поиска всех узлов по конкретному значению
+# for k in nFindAll:
+#     print(k.value, k.next)
+# # print ("↑ попытка найти все узлы и сделать обычный список")
+#
+# nDelAll = s_list.delete(77, all=True) #проверяем 1.2: удаление всех найденных узлов:
+# s_list.print_all_nodes()
+# # print ("↑ должны были удалить 77 из списка все, длина списка: ", s_list.len()) #проверяем 1.5: длина списка
+#
+# nInsert = s_list.insert(777, 513) #проверяем 1.6: вставка узла
+# s_list.print_all_nodes()
+# # print ("↑ должны были вставить 513 после 777, длина списка: ", s_list.len()) #проверяем 1.5: длина списка
+#
+# nClean = s_list.clean() #проверяем 1.3: очистка списка:
+# s_list.print_all_nodes()
+# # print ("↑ должны были очистить список, длина списка: ", s_list.len()) #проверяем 1.5: длина списка
+#
+# s_list.add_in_tail(Node(88))
+# s_list.print_all_nodes()
+# # print ("↑ должны были добавить 88 в конец списка, длина списка: ", s_list.len()) #проверяем 1.5: длина списка
+#
+# nInsert = s_list.insert(None, 515) #проверяем 1.6: вставка узла если None
+# s_list.print_all_nodes()
+# # print ("↑ должны были добавить 515 в начало списка, длина списка: ", s_list.len()) #проверяем 1.5: длина списка
+#
+#
+#
+#
+# # print ("par.1.8:")
+# my_list1 = LinkedList()
+# my_list1.add_in_tail(Node(11))
+# my_list1.add_in_tail(Node(22))
+# my_list1.add_in_tail(Node(33))
+# my_list2 = LinkedList()
+# my_list2.add_in_tail(Node(44))
+# my_list2.add_in_tail(Node(55))
+# my_list2.add_in_tail(Node(66))
+# # my_list2.add_in_tail(Node(77))
+#
+#
+# # в случае, если списки не равны, наверное, требуется ловить исключения для подобного теста:
+# # но в целом условия задачи выполнены
+# print ("lList1: ")
+# my_list1.print_all_nodes()
+# print ("lList2: ")
+# my_list2.print_all_nodes()
+#
+# sumTwoList = sum_of_two_linkedlist(my_list1, my_list2)
+# print ("sum of two lList:")
+# sumTwoList.print_all_nodes()
