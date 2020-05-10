@@ -86,6 +86,9 @@ class LinkedList:
             if self.tail.value == val:
                 nodePrev.next = None
                 i += 1
+        if i==0:
+            print ("this value is not in LinkedList")
+        return None
 
     # 1.3. Добавьте в класс LinkedList метод очистки всего содержимого (создание пустого списка) -- clean()
     # Подозреваю, что достаочно "голову" списка "обнулить"
@@ -191,7 +194,7 @@ def sum_of_two_linkedlist(lList1, lList2):
 
 # nDel = s_list.delete(8888, all=False) #проверяем 1.1: попытка удаление одного узла не из списка:
 # s_list.print_all_nodes()
-# # print ("↑ должны были удалить 8888 (нет такого) из списка один раз, длина списка: ", s_list.len()) #проверяем 1.5: длина списка
+# print ("↑ должны были удалить 8888 (нет такого) из списка один раз, длина списка: ", s_list.len()) #проверяем 1.5: длина списка
 #
 # nFindAll = s_list.find_all(77) #проверяем 1.4: поиска всех узлов по конкретному значению
 # for k in nFindAll:

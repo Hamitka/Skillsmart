@@ -100,5 +100,12 @@ class MyTestCase(unittest.TestCase):
         # testList.print_all_nodes()
         self.assertEqual(testList.head, None)
 
+    def test_linkedList_delete_all_True_not_in_list(self):
+        testList = skillsmart_LinkedList.LinkedList()
+        testNode = skillsmart_LinkedList.Node(88)
+        testList.add_in_tail(testNode)
+
+        testList.delete(77, True)
+        self.assertEqual(testList.head.value, 88)
 if __name__ == '__main__':
     unittest.main()
