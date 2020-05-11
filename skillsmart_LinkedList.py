@@ -74,18 +74,20 @@ class LinkedList:
             node = self.head
             nodeNext = self.head.next
             while nodeNext:
+                # print ("current Next ", nodeNext.value)
                 if (nodeNext.value == val):
                     node.next = nodeNext.next
-                    nodeNext = node.next
+                    nodeNext = nodeNext.next
                     i += 1
                     if not all:
                         return None
-                nodePrev = node
-                node = node.next
-                nodeNext = nodeNext.next
-            if self.tail.value == val:
-                nodePrev.next = None
-                i += 1
+                else:
+                    # nodePrev = node
+                    node = node.next
+                    nodeNext = nodeNext.next
+            # if self.tail.value == val:
+            #     nodePrev.next = None
+            #     i += 1
         if i==0:
             print ("this value is not in LinkedList")
         return None
@@ -206,9 +208,9 @@ nDelAll = s_list.delete(77, all=True) #проверяем 1.2: удаление 
 s_list.print_all_nodes()
 print ("↑ должны были удалить 77 из списка все, длина списка: ", s_list.len()) #проверяем 1.5: длина списка
 # #
-nDel = s_list.delete(512, all=False) #проверяем 1.1: удаление одного узла в конце:
+nDel = s_list.delete(333, all=False) #проверяем 1.1: удаление одного узла в конце:
 s_list.print_all_nodes()
-print ("↑ должны были удалить 512 (последний) из списка один раз, длина списка: ", s_list.len()) #проверяем 1.5: длина списка
+print ("↑ должны были удалить 333 (последний) из списка один раз, длина списка: ", s_list.len()) #проверяем 1.5: длина списка
 #
 # nInsert = s_list.insert(777, 513) #проверяем 1.6: вставка узла
 # s_list.print_all_nodes()
