@@ -86,6 +86,8 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(testList.head.next.value, 66)
         self.assertEqual(testList.head.next.next.value, 22)
         self.assertEqual(testList.head.next.next.next, None)
+        self.assertEqual(testList.tail.value, 22)
+        self.assertEqual(testList.tail.next, None)
         # print ("tail:", testList.tail.value)
         # self.assertEqual(testList.head.next.next.next, None)
 
