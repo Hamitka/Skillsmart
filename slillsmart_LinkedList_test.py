@@ -123,5 +123,13 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(testList.head, None)
         self.assertEqual(testList.tail, None)
 
+    def test_linkedList_delete_all_False_one_link(self):
+        testList = skillsmart_LinkedList.LinkedList()
+        testList.add_in_tail(skillsmart_LinkedList.Node(99))
+
+        testList.delete(99)
+        self.assertEqual(testList.head, None)
+        self.assertEqual(testList.tail, None)
+
 if __name__ == '__main__':
     unittest.main()

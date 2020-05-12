@@ -68,6 +68,8 @@ class LinkedList:
                     self.head = self.head.next
                     i += 1
                     if not all:
+                        if self.head is None:
+                            self.tail = None
                         return None
                     if self.head is None:
                         self.tail = None
