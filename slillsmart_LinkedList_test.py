@@ -131,5 +131,20 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(testList.head, None)
         self.assertEqual(testList.tail, None)
 
+    def test_linkedList(self):
+        testList = skillsmart_LinkedList.LinkedList()
+        testNode = skillsmart_LinkedList.Node(88)
+        testList.add_in_tail(testNode)
+        testList.add_in_tail(skillsmart_LinkedList.Node(66))
+        testList.add_in_tail(skillsmart_LinkedList.Node(22))
+        testList.add_in_tail(skillsmart_LinkedList.Node(77))
+        testList.add_in_tail(skillsmart_LinkedList.Node(77))
+        testList.add_in_tail(skillsmart_LinkedList.Node(77))
+        testList.add_in_tail(skillsmart_LinkedList.Node(77))
+
+        testList.clean()
+        self.assertEqual(testList.head, None)
+        self.assertEqual(testList.tail, None)
+
 if __name__ == '__main__':
     unittest.main()

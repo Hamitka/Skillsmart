@@ -109,6 +109,7 @@ class LinkedList:
         else:
             print ("LinkedList is cleared")
             self.head = None
+            self.tail = None
     # 1.5. Добавьте в класс LinkedList метод вычисления текущей длины списка -- len()
     def len(self):
         node = self.head
