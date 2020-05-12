@@ -86,6 +86,7 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(testList.head.next.value, 66)
         self.assertEqual(testList.head.next.next.value, 22)
         self.assertEqual(testList.head.next.next.next, None)
+        # print ("tail:", testList.tail.value)
         # self.assertEqual(testList.head.next.next.next, None)
 
     def test_linkedList_delete_all_True_all_same(self):

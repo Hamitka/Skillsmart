@@ -76,6 +76,7 @@ class LinkedList:
             while nodeNext:
                 # print ("current Next ", nodeNext.value)
                 if (nodeNext.value == val):
+                    # nodePrev = node
                     node.next = nodeNext.next
                     nodeNext = nodeNext.next
                     i += 1
@@ -85,7 +86,10 @@ class LinkedList:
                     # nodePrev = node
                     node = node.next
                     nodeNext = nodeNext.next
+                if node.next == None:
+                    self.tail = node
             # if self.tail.value == val:
+            #     print ("tail:", self.tail.value)
             #     nodePrev.next = None
             #     i += 1
         if i==0:
@@ -209,6 +213,7 @@ print ("↑ должны были удалить 77 (первый) из спис
 nDelAll = s_list.delete(77, all=True) #проверяем 1.2: удаление всех найденных узлов:
 s_list.print_all_nodes()
 print ("↑ должны были удалить 77 из списка все, длина списка: ", s_list.len()) #проверяем 1.5: длина списка
+print (s_list.tail.value)
 # #
 # nDel = s_list.delete(333, all=False) #проверяем 1.1: удаление одного узла в конце:
 # s_list.print_all_nodes()
