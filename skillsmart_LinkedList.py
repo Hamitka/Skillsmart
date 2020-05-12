@@ -70,6 +70,7 @@ class LinkedList:
                     if not all:
                         return None
                     if self.head is None:
+                        self.tail = None
                         return None
             node = self.head
             nodeNext = self.head.next
@@ -88,6 +89,7 @@ class LinkedList:
                     nodeNext = nodeNext.next
                 if node.next is None:
                     self.tail = node
+
             # if self.tail.value == val:
             #     print ("tail:", self.tail.value)
             #     nodePrev.next = None

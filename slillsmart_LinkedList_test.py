@@ -7,6 +7,7 @@ class MyTestCase(unittest.TestCase):
         testList = skillsmart_LinkedList.LinkedList()
         testNode = skillsmart_LinkedList.Node(88)
         testList.add_in_tail(testNode)
+        testList.add_in_tail(skillsmart_LinkedList.Node(88))
         testList.add_in_tail(skillsmart_LinkedList.Node(66))
         testList.add_in_tail(skillsmart_LinkedList.Node(22))
         testList.add_in_tail(skillsmart_LinkedList.Node(44))
@@ -16,14 +17,15 @@ class MyTestCase(unittest.TestCase):
         testList.add_in_tail(skillsmart_LinkedList.Node(77))
 
         testList.delete(88)
-        self.assertEqual(testList.head.value, 66)
-        self.assertEqual(testList.head.next.value, 22)
-        self.assertEqual(testList.head.next.next.value, 44)
-        self.assertEqual(testList.head.next.next.next.value, 33)
-        self.assertEqual(testList.head.next.next.next.next.value, 22)
-        self.assertEqual(testList.head.next.next.next.next.next.value, 88)
-        self.assertEqual(testList.head.next.next.next.next.next.next.value, 77)
-        self.assertEqual(testList.head.next.next.next.next.next.next.next, None)
+        self.assertEqual(testList.head.value, 88)
+        self.assertEqual(testList.head.next.value, 66)
+        self.assertEqual(testList.head.next.next.value, 22)
+        self.assertEqual(testList.head.next.next.next.value, 44)
+        self.assertEqual(testList.head.next.next.next.next.value, 33)
+        self.assertEqual(testList.head.next.next.next.next.next.value, 22)
+        self.assertEqual(testList.head.next.next.next.next.next.next.value, 88)
+        self.assertEqual(testList.head.next.next.next.next.next.next.next.value, 77)
+        self.assertEqual(testList.head.next.next.next.next.next.next.next.next, None)
 
     def test_linkedList_delete_all_False_midle(self):
         testList = skillsmart_LinkedList.LinkedList()
@@ -119,6 +121,7 @@ class MyTestCase(unittest.TestCase):
 
         testList.delete(99, True)
         self.assertEqual(testList.head, None)
+        self.assertEqual(testList.tail, None)
 
 if __name__ == '__main__':
     unittest.main()
