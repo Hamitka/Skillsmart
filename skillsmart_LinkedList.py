@@ -126,21 +126,20 @@ class LinkedList:
         node = self.head
         newNODE= Node(newNode)
         if afterNode is None:
-            newNODE.next = node
             self.head = newNODE
-            self.tail = self.head
+            newNODE.next = node
         else:
             while node is not None:
                 if node.value == afterNode:
                     newNODE.next = node.next
                     node.next = newNODE
-                    if node.next.next is None:
-                        self.tail = node.next
                     break
                 node = node.next
-
-
-
+        node = self.head
+        while node:
+            if node.next is None:
+                self.tail = node
+            node = node.next
         return None
 
 # * 1.8. Напишите функцию, которая получает на вход два связанных списка, состоящие из целых значений,

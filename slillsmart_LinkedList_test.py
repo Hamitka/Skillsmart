@@ -166,6 +166,32 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(testList.head.next.next.next, None)
         self.assertEqual(testList.tail.value, 22)
 
+        testList.insert(None, 44)
+        self.assertEqual(testList.head.value, 44)
+        self.assertEqual(testList.head.next.value, 11)
+        self.assertEqual(testList.head.next.next.value, 33)
+        self.assertEqual(testList.head.next.next.next.value, 22)
+        self.assertEqual(testList.head.next.next.next.next, None)
+        self.assertEqual(testList.tail.value, 22)
+
+        testList.insert(None, 22)
+        self.assertEqual(testList.head.value, 22)
+        self.assertEqual(testList.head.next.value, 44)
+        self.assertEqual(testList.head.next.next.value, 11)
+        self.assertEqual(testList.head.next.next.next.value, 33)
+        self.assertEqual(testList.head.next.next.next.next.value, 22)
+        self.assertEqual(testList.head.next.next.next.next.next, None)
+        self.assertEqual(testList.tail.value, 22)
+
+        testList.insert(22, 55)
+        self.assertEqual(testList.head.value, 22)
+        self.assertEqual(testList.head.next.value, 55)
+        self.assertEqual(testList.head.next.next.value, 44)
+        self.assertEqual(testList.head.next.next.next.value, 11)
+        self.assertEqual(testList.head.next.next.next.next.value, 33)
+        self.assertEqual(testList.head.next.next.next.next.next.value, 22)
+        self.assertEqual(testList.head.next.next.next.next.next.next, None)
+        self.assertEqual(testList.tail.value, 22)
 
 if __name__ == '__main__':
     unittest.main()
