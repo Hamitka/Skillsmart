@@ -124,15 +124,15 @@ class LinkedList:
     def insert(self, afterNode, newNode):
         # pass # здесь будет ваш код
         node = self.head
-        newNODE= Node(newNode)
+        # newNODE= Node(newNode)
         if afterNode is None:
-            self.head = newNODE
-            newNODE.next = node
+            self.head = newNode
+            newNode.next = node
         else:
             while node is not None:
                 if node.value == afterNode:
-                    newNODE.next = node.next
-                    node.next = newNODE
+                    newNode.next = node.next
+                    node.next = newNode
                     break
                 node = node.next
         node = self.head
