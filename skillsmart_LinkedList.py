@@ -170,7 +170,9 @@ s_list.add_in_tail(Node(512))
 s_list.add_in_tail(Node(77))
 # s_list.add_in_tail(Node(777))
 s_list.add_in_tail(Node(77))
-s_list.add_in_tail(Node(333))
+s_list.add_in_tail(Node(77))
+s_list.add_in_tail(Node(77))
+# s_list.add_in_tail(Node(333))
 # s_list.print_all_nodes()
 
 # # nFind = s_list.find(55)
@@ -208,9 +210,9 @@ nDelAll = s_list.delete(77, all=True) #проверяем 1.2: удаление 
 s_list.print_all_nodes()
 print ("↑ должны были удалить 77 из списка все, длина списка: ", s_list.len()) #проверяем 1.5: длина списка
 # #
-nDel = s_list.delete(333, all=False) #проверяем 1.1: удаление одного узла в конце:
-s_list.print_all_nodes()
-print ("↑ должны были удалить 333 (последний) из списка один раз, длина списка: ", s_list.len()) #проверяем 1.5: длина списка
+# nDel = s_list.delete(333, all=False) #проверяем 1.1: удаление одного узла в конце:
+# s_list.print_all_nodes()
+# print ("↑ должны были удалить 333 (последний) из списка один раз, длина списка: ", s_list.len()) #проверяем 1.5: длина списка
 #
 # nInsert = s_list.insert(777, 513) #проверяем 1.6: вставка узла
 # s_list.print_all_nodes()

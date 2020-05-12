@@ -76,6 +76,8 @@ class MyTestCase(unittest.TestCase):
         testList.add_in_tail(skillsmart_LinkedList.Node(22))
         testList.add_in_tail(skillsmart_LinkedList.Node(77))
         testList.add_in_tail(skillsmart_LinkedList.Node(77))
+        testList.add_in_tail(skillsmart_LinkedList.Node(77))
+        testList.add_in_tail(skillsmart_LinkedList.Node(77))
 
         testList.delete(77, True)
 
