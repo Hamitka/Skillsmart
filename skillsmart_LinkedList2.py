@@ -24,7 +24,7 @@ class LinkedList2:
     def find(self, val):
         # return None # здесь будет ваш код
         if self.tail is None:
-            print("LinkedList is empty")
+            # print("LinkedList is empty")
             return None
         node = self.tail
         while node:
@@ -37,7 +37,7 @@ class LinkedList2:
     def find_all(self, val):
         listOfFind = []
         if self.tail is None:
-            print("LinkedList is empty")
+            # print("LinkedList is empty")
             return listOfFind
         node = self.tail
         while node is not None:
@@ -53,7 +53,7 @@ class LinkedList2:
         # pass # здесь будет ваш
         i = 0
         if self.tail is None:
-            print("LinkedList is empty")
+            # print("LinkedList is empty")
             return None
         if self.tail.value == val:
             while self.tail.value == val:
@@ -83,14 +83,16 @@ class LinkedList2:
                 if node.prev is None:
                     self.head = node
         if i == 0:
-            print("this value is not in LinkedList")
+            pass
+            # print("this value is not in LinkedList")
         return None
 
     # 2.7. Добавьте в класс LinkedList2 метод очистки всего содержимого (создание пустого списка) -- clean()
     def clean(self):
         # pass # здесь будет ваш код
         if self.tail is None:
-            print("LinkedList is already empty")
+            # print("LinkedList is already empty")
+            pass
         else:
             self.tail = None
             self.head = None
@@ -131,9 +133,9 @@ class LinkedList2:
                 if node == afterNode:
                     newNode.next = node.next
                     node.next = newNode
-                    print(f"---{newNode.value}")
+                    # print(f"---{newNode.value}")
                     newNode.prev = node
-                    print(f"--{newNode.prev.value}")
+                    # print(f"--{newNode.prev.value}")
                     return None
                 node = node.prev
 
@@ -145,16 +147,16 @@ class LinkedList2:
         newNode.next = node
         node.prev = newNode
 
-    def print_forward_and_back(self):
-        node = self.head
-        print("→", end=" ")
-        while node:
-            print(node.value, end=" ")
-            node = node.next
-
-        node = self.tail
-        print("←", end=" ")
-        while node:
-            print(node.value, end=" ")
-            node = node.prev
-        print("")
+    # def print_forward_and_back(self):
+    #     node = self.head
+    #     print("→", end=" ")
+    #     while node:
+    #         print(node.value, end=" ")
+    #         node = node.next
+    #
+    #     node = self.tail
+    #     print("←", end=" ")
+    #     while node:
+    #         print(node.value, end=" ")
+    #         node = node.prev
+    #     print("")
