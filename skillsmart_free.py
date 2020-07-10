@@ -1,9 +1,29 @@
-def odometer(listOksana):
-    listSpeed = [i for i in listOksana[::2]]
-    listHour = [0] + [i for i in listOksana[1::2]]
-    listHour = [listHour[i] - listHour[i-1] for i in range(1, len(listHour))]
-    return sum([listSpeed[i]*listHour[i] for i in range(len(listHour))])
+def ConquestCampaign(N, M, L, list):
+    pole = [[0 for x in range(M)] for y in range(N)]
+    batx = [i - 1 for i in list[::2]]
+    baty = [i - 1 for i in list[1::2]]
 
-# listTest = [20,2,30,6,10,7]
-# print (odometer(listTest))
-# print(squirrel(int(input())))
+    for i in range(len(batx)):
+        pole[batx[i]][baty[i]] = 1
+
+    for d in range(1, N + M - 1):
+        for i in range(N):
+            for j in range(M):
+                if pole[i][j] == d:
+                    for di in range(-1, 2, 2):
+                        ai = i + di
+                        if 0 <= ai < N and pole[ai][j] == 0:
+                            pole[ai][j] = d + 1
+                    for dj in range(-1, 2, 2):
+                        aj = j + dj
+                        if 0 <= aj < M and pole[i][aj] == 0:
+                            pole[i][aj] = d + 1
+    # [print(i) for i in pole]
+    return max([max(i) for i in pole])
+
+# N = 30
+# M = 4
+# L = 2
+# battalion = [2,2, 3,4]
+#
+# print (ConquestCampaign(N, M, L, battalion))
