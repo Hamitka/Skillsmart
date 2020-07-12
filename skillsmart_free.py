@@ -1,24 +1,24 @@
-def PatternUnlock(N, listHits):
-    #возможно перемудрил..
-    pole = [[6, 1, 9], [5, 2, 8], [4, 3, 7]]
-    listXY = []
-    listWay = []
-    g = 2**0.5
+def WordSearch(lenght, s, subs):
+    # listS = [s[x:x+lenght] for x in range(0, len(s), lenght)]
+    listS = [[word[x:x+lenght] for x in range(0, len(word), lenght)] for word in s.split()]
+    listS = [item for sublist in listS for item in sublist ]
+    listNewS=[]
+    listLenS = [(len(w)+1) for w in listS]
 
-    for k in listHits:
-        for x, y in enumerate(pole):
-            if k in y:
-                listXY +=[[x, y.index(k)]]
-    for xy in range(1, len(listXY)):
-        if (listXY[xy][0] != listXY[xy-1][0] and listXY[xy][1] != listXY[xy-1][1]):
-            listWay+=[g]
-        else:
-            listWay+=[1]
-    listWaystr = [s for s in str("{:.5f}".format(sum(listWay))) if '1'<=s<='9']
-    waystr = ""
-    return waystr.join(listWaystr)
+    x=0
+    while x < len(listLenS):
+        y = 1
+        while sum(listLenS[x:x+y]) <= lenght+1:
+            y += 1
+            if y >= lenght/2:
+                break
+        listNewS+= [listS[x:x+y-1]]
+        x=x+y-1
+    listFind = [1 if subs in i else 0 for i in listNewS]
 
-# hits = [1, 2, 3, 4, 5, 6, 2, 7, 8, 9]
-# print(PatternUnlock(10, hits))
+    return listFind
 
-
+# lenghtE = 12
+# s = 'строка разбивается на набор строк     через выравнивание по заданной ширине.'
+# subs = 'на'
+# print (*WordSearch(lenghtE, s, subs))
