@@ -1,6 +1,6 @@
 def TheRabbitsFoot(s, encode=False):
     def listTransponse(listIn):
-        listOut = [[''] * len(listIn) for i in range(len(listIn))]
+        listOut = [[''] * len(listIn) for i in range(len(listIn)+1)]
         for i in range(len(listIn)):
             for j in range(len(listIn[i])):
                 try:
@@ -21,7 +21,13 @@ def TheRabbitsFoot(s, encode=False):
         return ''.join(listDeCode)
 
 
-# s = 'отдай мою кроличью лапку'
-# scode = 'омоюу толл дюиа акчп йрьк'
+# s = 'отдай мою кроличью лапку, щенок'
+# lenS = len(s.replace(' ', ''))
+# print (lenS, lenS**.5)
+#
+# scode = 'ооипн тючко дкьук арю, йолщ млае'
+# lenScode = len(scode.replace(' ', ''))
+# print (lenScode, lenScode**.5)
+#
 # print(TheRabbitsFoot(s))
 # print(TheRabbitsFoot(scode, True))
