@@ -18,7 +18,7 @@ def TheRabbitsFoot(s, encode=False):
         return ' '.join(listCode)
     else:
         listDeCode = listTransponse(s.split())
-        return ' '.join(listDeCode)
+        return ''.join(listDeCode)
 
 
 # s = 'отдай мою кроличью лапку'
