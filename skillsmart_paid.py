@@ -1,4 +1,4 @@
-def TheRabbitsFoot(s, encode=False):
+def TheRabbitsFoot(s, encode=True):
     def listTransponse(listIn):
         listOut = [[''] * len(listIn) for i in range(len(listIn) + 1)]
         for i in range(len(listIn)):
@@ -11,7 +11,7 @@ def TheRabbitsFoot(s, encode=False):
         # print(listOut)
         return listOut
 
-    if encode == False:
+    if encode == True:
         s = s.replace(' ', '')
         sqrtS = len(s) ** .5
         upLimit = int(sqrtS + 3 / 10 + 3 / 10 + 3 / 10 + 0.1)
@@ -29,9 +29,7 @@ def TheRabbitsFoot(s, encode=False):
 # lenS = len(s.replace(' ', ''))
 # print(lenS, lenS ** .5)
 #
-# scode = 'ооипна тючкон дкьуку арю,,ж йолщон млаена'
-# lenScode = len(scode.replace(' ', ''))
-# print(lenScode, lenScode ** .5)
-#
-# print(TheRabbitsFoot(s))
-# print(TheRabbitsFoot(scode, True))
+# print(TheRabbitsFoot(s, False))
+# print(TheRabbitsFoot(TheRabbitsFoot(s, True), False))
+# print (s.replace(' ', '').strip())
+# print ((TheRabbitsFoot(TheRabbitsFoot(s, True), False))==(s.replace(' ', '').strip()))
