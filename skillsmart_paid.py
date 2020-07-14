@@ -12,17 +12,17 @@ def TheRabbitsFoot(s, encode=True):
         return listOut
 
     if encode == True:
-        s = s.replace(' ', '')
+        s = s.replace(' ', '').strip()
         sqrtS = len(s) ** .5
         upLimit = int(sqrtS + 3 / 10 + 3 / 10 + 3 / 10 + 0.1)
         listMatrixS = [list(s[x:x + upLimit]) for x in range(0, len(s), upLimit)]
         listCode = listTransponse(listMatrixS)
 
         # print(listMatrixS)
-        return ' '.join(listCode)
+        return ' '.join(listCode).strip()
     else:
         listDeCode = listTransponse(s.split())
-        return ''.join(listDeCode)
+        return ''.join(listDeCode).strip()
 
 
 # s = 'отдай мою кроличью лапку, щенок, она нужна'
