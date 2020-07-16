@@ -1,4 +1,6 @@
 def BigMinus(s1, s2):
+    if s1 == s2:
+        return '0'
     listS1 = [int(i) for i in s1[::-1]]
     listS2 = [int(i) for i in s2[::-1]]
     lenS1 = len(s1)
@@ -38,3 +40,4 @@ def BigMinus(s1, s2):
 #
 # print(BigMinus(s1, s2))
 # print(BigMinus('1', '321'))
+# print(BigMinus('123456789', '123456789'))
