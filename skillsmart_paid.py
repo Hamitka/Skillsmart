@@ -1,22 +1,26 @@
-def MassVote(N, Votes):
-    maxV = max(Votes)
-    if Votes.count(maxV)>1:
-        return 'no winner'
-    maxPercent = round(maxV*100/sum(Votes), 2)
-    winner = Votes.index(maxV)+1
-    if maxPercent>50:
-        return 'majority winner '+ str(winner)
-    else:
-        return 'minority winner ' + str(winner)
+def UFO(N, data, octal):
+    def from8to10(d):
+        list8D =[int(i) for i in str(d)]
+        r = len(list8D)
+        list10D = [list8D[i]*8**(r-1-i) for i in range(r)]
+        return sum(list10D)
 
-# Vote = [60, 10, 10, 15, 5]
-# N = len(Vote)
-# print(MassVote(N, Vote))
+    def from16to10(d):
+        list16D =[int(i) for i in str(d)]
+        r = len(list16D)
+        list10D = [list16D[i]*16**(r-1-i) for i in range(r)]
+        return sum(list10D)
+
+    if octal:
+        return [from8to10(i) for i in data]
+    else:
+        return [from16to10(i) for i in data]
+
+
+# data1 = [1234, 1777]
+# N1 = len(data1)
+# print (UFO(N1, data1, octal=False))
 #
-# Vote1 = [10, 15, 11]
-# N1 = len(Vote1)
-# print(MassVote(N1, Vote1))
-#
-# Vote2 = [111, 111, 110, 110]
-# N2 = len(Vote2)
-# print(MassVote(N2, Vote2))
+# data2 = [1234, 1777]
+# N2 = len(data2)
+# print (UFO(N2, data2, octal=True))
