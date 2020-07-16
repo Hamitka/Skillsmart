@@ -1,19 +1,40 @@
-def PrintingCosts(lineS):
-    listOfOutgo = [' ', '0', '!', '9', '"', '6', '#', '24', '$', '29', '%', '22', '&', '24', "'", '3', '(', '12',
-                   ')', '12', '*', '17', '+', '13', ',', '7', '-', '7', '.', '4', '/', '10', '0', '22', '1', '19',
-                   '2', '22', '3', '23', '4', '21', '5', '27', '6', '26', '7', '16', '8', '23', '9', '26', ':', '8',
-                   ';', '11', '<', '10', '=', '14', '>', '10', '?', '15', '@', '32', 'A', '24', 'B', '29', 'C', '20',
-                   'D', '26', 'E', '26', 'F', '20', 'G', '25', 'H', '25', 'I', '18', 'J', '18', 'K', '21', 'L', '16',
-                   'M', '28', 'N', '25', 'O', '26', 'P', '23', 'Q', '31', 'R', '28', 'S', '25', 'T', '16', 'U', '23',
-                   'V', '19', 'W', '26', 'X', '18', 'Y', '14', 'Z', '22', '[', '18', '\\', '10', ']', '18', '^', '7',
-                   '_', '8', '`', '3', 'a', '23', 'b', '25', 'c', '17', 'd', '25', 'e', '23', 'f', '18', 'g', '30',
-                   'h', '21', 'i', '15', 'j', '20', 'k', '21', 'l', '16', 'm', '22', 'n', '18', 'o', '20', 'p', '25',
-                   'q', '25', 'r', '13', 's', '21', 't', '17', 'u', '17', 'v', '13', 'w', '19', 'x', '13', 'y', '24',
-                   'z', '19', '{', '18', '|', '12', '}', '18', '~', '9']
-    dictOfOutgo = dict(zip(listOfOutgo[::2], listOfOutgo[1::2]))
-    listOfSymbol = list(lineS)
-    listOfToner = [int(dictOfOutgo[key]) if key in dictOfOutgo.keys() else 23 for key in listOfSymbol]
+def BigMinus(s1, s2):
+    listS1 = [int(i) for i in s1[::-1]]
+    listS2 = [int(i) for i in s2[::-1]]
+    lenS1 = len(s1)
+    lenS2 = len(s2)
+    digitDiff = abs(lenS1-lenS2)
+    if lenS1<lenS2:
+        for i in range(digitDiff):
+            listS1+=[0]
+    elif lenS2<lenS1:
+        for i in range(digitDiff):
+            listS2+=[0]
+    lenMax = len(listS1)
+    for i in reversed(range(lenMax)):
+        if listS1[i]<listS2[i]:
+            listMax = listS2
+            listMin = listS1
+            break
+        elif listS1[i]>listS2[i]:
+            listMax = listS1
+            listMin = listS2
+            break
+        else:
+            continue
 
-    return sum(listOfToner)
+    listS3 = [(listMax[i]-listMin[i]) for i in range(lenMax)]
+    for i in range(lenMax-1):
+        if listS3[i] <0:
+            listS3[i] = 10+listS3[i]
+            listS3[i+1] = listS3[i+1]-1
+    strList3 = ''.join([str(i) for i in listS3[::-1]])
+    return strList3
 
-# print (PrintingCosts('bla bla, bl@ b;@'))
+# s2 = '510909421717094400000'
+# s1 = '121645100408832000'
+# # s2 = '12 1645 1004 0883 2000'
+# s1_minus_s2 = '510787776616685568000'
+#
+# print(BigMinus(s1, s2))
+# print(BigMinus('1', '321'))
