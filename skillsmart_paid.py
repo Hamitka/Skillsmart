@@ -1,26 +1,19 @@
-def UFO(N, data, octal):
-    def from8to10(d):
-        list8D =[int(i) for i in str(d)]
-        r = len(list8D)
-        list10D = [list8D[i]*8**(r-1-i) for i in range(r)]
-        return sum(list10D)
+def Unmanned(L, N, traffic_light):
+    def traffLighterRed(wayLenght, traffOneL):
+        time = traffOneL[1]
+        way = [i for i in range(1, wayLenght+1)]
+        traff  = [list(way[x:x+time]) for x in range(0, wayLenght, time)]
+        traffRed = [item for sublist in traff[0::2] for item in sublist]
+        return traffRed
+    timeWay = 0
+    for tl in traffic_light:
+        lighter = traffLighterRed(L, tl)
+        if tl[0]+timeWay in lighter:
+            timeWay+=max(lighter)-tl[0]
 
-    def from16to10(d):
-        list16D =[int(i) for i in str(d)]
-        r = len(list16D)
-        list10D = [list16D[i]*16**(r-1-i) for i in range(r)]
-        return sum(list10D)
+    return timeWay+L
 
-    if octal:
-        return [from8to10(i) for i in data]
-    else:
-        return [from16to10(i) for i in data]
-
-
-# data1 = [1234, 1777]
-# N1 = len(data1)
-# print (UFO(N1, data1, octal=False))
-#
-# data2 = [1234, 1777]
-# N2 = len(data2)
-# print (UFO(N2, data2, octal=True))
+# L1 = 10
+# N1 = 2
+# traffic_l1 = [[5, 5, 5], [2, 2, 2]]
+# print(Unmanned(L1, N1, traffic_l1))
