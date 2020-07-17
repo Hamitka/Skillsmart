@@ -1,7 +1,7 @@
 def LineAnalysis(S):
     listPattern = list(S)
     if '.' not in listPattern:
-        return 'да'
+        return True
     listPatternTemp = listPattern[1::]
     listOfListPattern = []
     y=0
@@ -11,9 +11,9 @@ def LineAnalysis(S):
            y=i+1
     setPattern = set(tuple(i) for i in listOfListPattern)
     if len(setPattern) <=1:
-        return 'да'
+        return True
     else:
-        return 'нет'
+        return False
 
 # s1 = '*..*..*..*..*..*..*'
 # s2 = '*..*...*..*..*..*..*'
