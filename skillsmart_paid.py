@@ -1,25 +1,12 @@
-def Unmanned(L, N, traffic_light):
-    timeWay = 0
-    for tl in traffic_light:
-        if tl[0] >= L:
-            return L
-        elif (tl[0] + timeWay) % (tl[1] + tl[2]) in range(1, tl[1] + 1):
-            timeWay += (tl[1] - (tl[0] + timeWay) % (tl[1] + tl[2]))
+def MaximumDiscount(N, price):
+    price.sort()
+    price = price[::-1]
+    lenP = len(price)
+    listDiscount = [price[x:x + 3] for x in range(0, lenP, 3)]
+    listDiscountSum = [min(sublist) for sublist in listDiscount if len(sublist) == 3]
+    # listDiscountSum = [min(sublist) if len(sublist) == 3 else -sum(sublist) for sublist in listDiscount]
+    return sum(listDiscountSum)
 
-    return timeWay + L
-
-
-# L1 = 10
-# N1 = 1
-# traffic_l1 = [[3, 5, 5], [5, 2, 2]]
-# traffic_l2 = [[5, 55, 5]]
-# traffic_l3 = [[3, 6, 2], [6, 2, 2]]
-# traffic_l4 = [[6, 2, 2]]
-# traffic_l5 = [[1, 2, 2]]
-# traffic_l6 = [[11, 5, 5], [15, 2, 2]]
-# print(Unmanned(L1, N1, traffic_l1))
-# print(Unmanned(L1, N1, traffic_l2))
-# print(Unmanned(L1, N1, traffic_l3))
-# print(Unmanned(L1, N1, traffic_l4))
-# print(Unmanned(L1, N1, traffic_l5))
-# print(Unmanned(L1, N1, traffic_l6))
+# price1 = [250, 100, 300, 400, 200, 150, 350]
+# N1 = len(price1)
+# print(MaximumDiscount(N1, price1))
