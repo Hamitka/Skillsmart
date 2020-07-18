@@ -8,8 +8,9 @@ def ShopOLAP(N, items):
 
     return listOut
 
-# # list1 = [['платье1', 5], ['сумка32', 2], ['платье1', 1], ['сумка23', 2], ['сумка128', 4]]
+# list1 = [['платье1', 5], ['сумка32', 2], ['платье1', 1], ['сумка23', 2], ['сумка128', 4]]
 # list1 = ['платье1 5', 'сумка32 2', 'платье1 1', 'сумка23 2', 'сумка128 4']
 # N1 = len(list1)
 # print(ShopOLAP(N1, list1))
 # print (ShopOLAP(5, ["dress1 5", "handbug32 3", "dress2 1", "handbug23 2", "handbug128 4"]))
+# print (ShopOLAP(1, []))
