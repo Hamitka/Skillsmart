@@ -1,6 +1,7 @@
 def ShopOLAP(N, items):
     items = [int(i) if i.isdigit() else i for s in items for i in s.split()]
     items = [items[x:x+2] for x in range(0, len(items), 2)]
+    items = [[str(sublist[0]), sublist[1]] for sublist in items]
     items.sort()
     dictItems = {key[0]: (sum(items[i][1] for i in range(len(items)) if items[i][0] == key[0])) for key in items}
     dictItems = {k: v for k, v in sorted(dictItems.items(), key= lambda x:x[1], reverse=True)}
