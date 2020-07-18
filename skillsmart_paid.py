@@ -4,7 +4,7 @@ def ShopOLAP(N, items):
     items.sort()
     dictItems = {key[0]: (sum(items[i][1] for i in range(len(items)) if items[i][0] == key[0])) for key in items}
     dictItems = {k: v for k, v in sorted(dictItems.items(), key= lambda x:x[1], reverse=True)}
-    listOut = [key + ' ' + str(value) for key, value in dictItems.items()]
+    listOut = [str(key) + ' ' + str(value) for key, value in dictItems.items()]
 
     return listOut
 
@@ -14,3 +14,4 @@ def ShopOLAP(N, items):
 # print(ShopOLAP(N1, list1))
 # print (ShopOLAP(5, ["dress1 5", "handbug32 3", "dress2 1", "handbug23 2", "handbug128 4"]))
 # print (ShopOLAP(1, []))
+# print (ShopOLAP(8, ["123 5", "32 3", "124 5", "128 1", "32 2", "23 4", "128 4", "128 1"]))
