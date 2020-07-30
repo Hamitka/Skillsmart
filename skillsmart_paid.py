@@ -1,25 +1,23 @@
-def BiggerGreater(s: str):
-    if len(set(s)) <= 1: return ''
-    lstPermutation = []
-
-    def permutation(a, k=0):
-        nonlocal lstPermutation
-        if k == len(a):
-            lstPermutation += [''.join(a)]
+def SherlockValidString(s: str):
+    lstCountS = [list(s).count(i) for i in set(list(s))]
+    if len(set(lstCountS)) == 1:
+        return True
+    for i in range(len(lstCountS)):
+        lstCountS[i] -= 1
+        if 0 in lstCountS:
+            if len(set(lstCountS[0:i] + lstCountS[i + 1:])) == 1: return True
         else:
-            for i in range(k, len(a)):
-                a[k], a[i] = a[i], a[k]
-                permutation(a, k + 1)
-                a[k], a[i] = a[i], a[k]
-
-    permutation(list(s))
-    lstPermutation = [i for i in lstPermutation if i > s]
-    return (min(lstPermutation) if len(lstPermutation) > 0 else '')
+            if len(set(lstCountS)) == 1: return True
+        lstCountS[i] += 1
+    return False
 
 
-# print(BiggerGreater('fff'))
-# print(BiggerGreater(''))
-# print(BiggerGreater('нклм'))
-# print(BiggerGreater('вибк'))
-# print(BiggerGreater('вкиб'))
-# print(BiggerGreater('za'))
+# print(SherlockValidString('xyz'))
+# print(SherlockValidString('xxyyz'))
+# print(SherlockValidString('xyzaa'))
+# print(SherlockValidString('xxyyzabc'))
+# print(SherlockValidString('xxyyza'))
+# print(SherlockValidString('xyzzz'))
+# print(SherlockValidString('xxxxyyyzzz'))
+# print(SherlockValidString('x'))
+# print(SherlockValidString('xy'))
