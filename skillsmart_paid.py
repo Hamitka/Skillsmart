@@ -14,7 +14,7 @@ def BiggerGreater(s: str):
 
     permutation(list(s))
     lstPermutation = [i for i in lstPermutation if i > s]
-    return (min(lstPermutation))
+    return (min(lstPermutation) if len(lstPermutation) > 0 else '')
 
 
 # print(BiggerGreater('fff'))
@@ -22,3 +22,4 @@ def BiggerGreater(s: str):
 # print(BiggerGreater('нклм'))
 # print(BiggerGreater('вибк'))
 # print(BiggerGreater('вкиб'))
+# print(BiggerGreater('za'))
