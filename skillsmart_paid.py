@@ -1,28 +1,35 @@
-def TreeOfLife(H, W, N, lstField: list):
-    def clearPeerArray(lst: list):
-        lstCopy = [x[:] for x in lst]
-        for i in range(len(lst)):
-            for j in range(len(lst[i])):
-                if lstCopy[i][j] >= 3:
-                    for di in range(-1, 2):
-                        ai = i + di
-                        if 0 <= ai < len(lst):
-                            lst[ai][j] = 0
-                    for dj in range(-1, 2):
-                        aj = j + dj
-                        if 0 <= aj < len(lst[i]):
-                            lst[i][aj] = 0
-        return lst
+def MatrixTurn(lst:list, M:int, N:int, T:int):
+    lstRotate = [list(i) for i in lst]
+    # print(*lstRotate, sep='\n')
 
-    lstField = [[0 if n == '.' else 1 for n in i] for i in lstField]
-    for i in range(1, N + 1):
-        lstField = [[i + 1 for i in sublist] for sublist in lstField]
-        if i % 2 == 0:
-            clearPeerArray(lstField)
-    # print (*lstField)
-    lstField = [''.join(['.' if i == 0 else '+' for i in sublist]) for sublist in lstField]
-    # print(*lstField)
-    return lstField
+    def kontur(lst):
+        n, m = len(lst), len(lst[0])
+        numK = min(n, m)//2
+        lstOfKontur = [[] for _ in range(numK)]
+        lstOfXYKontur = [[] for _ in range(numK)]
+        for k in range(numK):
+            dx, dy = n-k-1, m-k-1
+            for i in range(k, dx):
+                lstOfKontur[k] += lst[i][k]
+                lstOfXYKontur[k] += [(i, k)]
+            for j in range(k, dy):
+                lstOfKontur[k] += lst[dx][j]
+                lstOfXYKontur[k] += [(dx, j)]
+            for i in range(dx, k, -1):
+                lstOfKontur[k] += lst[i][dy]
+                lstOfXYKontur[k] +=[(i, dy)]
+            for j in range(dy, k, -1):
+                lstOfKontur[k] += lst[k][j]
+                lstOfXYKontur[k] += [(k, j)]
+        return lstOfKontur, lstOfXYKontur
+    lstKontur, lstXYKontur = kontur(lstRotate)
+    lstKontur = [sublist[T:]+sublist[:T] for sublist in lstKontur]
 
-# print(TreeOfLife(3, 4, 12, [".+..","..+.",".+.."]))
-# TreeOfLife(3, 4, 12, [".+..",".+..",".+.."])
+    for k, val in enumerate(lstXYKontur):
+        for u, tup in enumerate(val):
+            lstRotate[tup[0]][tup[1]] = lstKontur[k][u]
+    # print(*lstRotate, sep='\n')
+    return [''.join(sublist) for sublist in lstRotate]
+
+
+# print(*MatrixTurn(["023456", "234567", "345678", "156789"], 4, 6, 3), sep='\n')
