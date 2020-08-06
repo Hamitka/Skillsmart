@@ -1,5 +1,5 @@
 def MatrixTurn(lst:list, M:int, N:int, T:int):
-    # print (*lst, sep='\n')
+    # print (id(lst), *lst, sep='\n')
     # print()
     lstRotate = [list(i) for i in lst]
     # print(*lstRotate, sep='\n')
@@ -31,8 +31,10 @@ def MatrixTurn(lst:list, M:int, N:int, T:int):
         for u, tup in enumerate(val):
             lstRotate[tup[0]][tup[1]] = lstKontur[k][u]
     # print(*lstRotate, sep='\n')
-    lst = [''.join(sublist) for sublist in lstRotate]
-
+    lst[:]= [''.join(sublist) for sublist in lstRotate]
+#     print(id(lst), *lst, sep='\n')
+#     print()
+#
 # listTest = ["023456", "234567", "345678", "156789"]
-# MatrixTurn(["023456", "234567", "345678", "156789"], 4, 6, 3)
-# print (listTest)
+# MatrixTurn(listTest, 4, 6, 3)
+# print (id(listTest), *listTest, sep='\n')
