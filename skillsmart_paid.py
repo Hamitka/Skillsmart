@@ -1,13 +1,32 @@
-def TransformTransform(lst:list, N:int):
-    def sA(lstA:list):
-        lstB = []
-        N = len(lstA)
-        for i in range(N):
-            for j in range(N-i):
-                k = i + j
-                lstB += [max(lstA[j:k+1])]
-        return lstB
-    return sum(sA(sA(lst)))%2 == 0
+def BalancedParentheses(N: int):
+    assert N > 0
+    lstPermutation = []
 
-# print(TransformTransform([1, 2, 3, 4, 5, 6, 7], 7))
-# print(TransformTransform([3, 2, 1], 7))
+    def permutation(a, k=0):
+        nonlocal lstPermutation
+        if k == len(a):
+            lstPermutation += [''.join(a)]
+        else:
+            for i in range(k, len(a)):
+                a[k], a[i] = a[i], a[k]
+                permutation(a, k + 1)
+                a[k], a[i] = a[i], a[k]
+
+    permutation(['(', ')'] * N)
+
+    def bkt(s: str):
+        open, close = 0, 0
+        for i in s:
+            if '(' in i:
+                open += 1
+            elif ')' in i:
+                close += 1
+            if open-close <0: return False
+        if open-close == 0: return True
+        else: return False
+
+    lst_bkt = [i for i in set(lstPermutation) if bkt(i)]
+    return ' '.join(lst_bkt, )
+
+
+# print(BalancedParentheses(4))
