@@ -1,5 +1,4 @@
 def BalancedParentheses(N: int):
-    assert N > 0
     lstPermutation = []
 
     def permutation(a, k=0):
@@ -26,7 +25,8 @@ def BalancedParentheses(N: int):
         else: return False
 
     lst_bkt = [i for i in set(lstPermutation) if bkt(i)]
-    return ' '.join(lst_bkt, )
+    return ' '.join(lst_bkt)
 
 
-# print(BalancedParentheses(4))
+# print(type(BalancedParentheses(4)))
+# print((BalancedParentheses(1)))
