@@ -1,32 +1,22 @@
 def BalancedParentheses(N: int):
-    lstPermutation = []
+    lst_out = []
 
-    def permutation(a, k=0):
-        nonlocal lstPermutation
-        if k == len(a):
-            lstPermutation += [''.join(a)]
-        else:
-            for i in range(k, len(a)):
-                a[k], a[i] = a[i], a[k]
-                permutation(a, k + 1)
-                a[k], a[i] = a[i], a[k]
+    def bkt(S='', left=0, right=0):
+        if len(S) == 2 * N:
+            lst_out.append(S)
+            return
+        if left < N:
+            bkt(S + '(', left + 1, right)
+        if right < left:
+            bkt(S + ')', left, right + 1)
 
-    permutation(['(', ')'] * N)
-
-    def bkt(s: str):
-        open, close = 0, 0
-        for i in s:
-            if '(' in i:
-                open += 1
-            elif ')' in i:
-                close += 1
-            if open-close <0: return False
-        if open-close == 0: return True
-        else: return False
-
-    lst_bkt = [i for i in set(lstPermutation) if bkt(i)]
-    return ' '.join(lst_bkt)
-
+    bkt()
+    return ' '.join(lst_out)
 
 # print(type(BalancedParentheses(4)))
+# print((BalancedParentheses(10)))
+# print((BalancedParentheses(4)))
+# # print ([i for i in ['()()()()', '()(())()', '(()()())', '(()())()', '()()(())', '(())()()', '(()(()))', '(())(())', '()(()())', '((())())', '()((()))', '((()))()', '((()()))', '(((())))'] if i not in BalancedParentheses(4)])
+# print((BalancedParentheses(3)))
+# print((BalancedParentheses(2)))
 # print((BalancedParentheses(1)))
