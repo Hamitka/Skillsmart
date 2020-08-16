@@ -1,22 +1,31 @@
-def BalancedParentheses(N: int):
-    lst_out = []
+def Football(F:list, N:int) -> bool:
+    if len(F)<=1: return False
+    dict_orig = {i: val for i, val in enumerate(F)}
+    dict_sort = {i: val for i, val in sorted(dict_orig.items(), key=lambda x: x[1])}
+    lst_diff = [list(dict_orig.keys())[i] - list(dict_sort.keys())[i] for i in range(len(F))]
 
-    def bkt(S='', left=0, right=0):
-        if len(S) == 2 * N:
-            lst_out.append(S)
-            return
-        if left < N:
-            bkt(S + '(', left + 1, right)
-        if right < left:
-            bkt(S + ')', left, right + 1)
+    def check_replace() -> bool:
+        if len(set(lst_diff)) == 3:
+            return True
+        return False
 
-    bkt()
-    return ' '.join(lst_out)
+    def check_reverse() -> bool:
+        lst_index_change = [i for i, val in enumerate(lst_diff) if val !=0]
+        min_reverse, max_reverse = min(lst_index_change), max(lst_index_change)
+        lst_reverse = list(map(int, (list(map(str, F[:min_reverse])) + list(map(str, F[min_reverse:max_reverse+1][::-1])) + list(map(str, F[max_reverse+1:])))))
+        if lst_reverse == sorted(F):
+            return True
+        return False
+    if check_replace() or check_reverse():
+        return True
+    return False
 
-# print(type(BalancedParentheses(4)))
-# print((BalancedParentheses(10)))
-# print((BalancedParentheses(4)))
-# # print ([i for i in ['()()()()', '()(())()', '(()()())', '(()())()', '()()(())', '(())()()', '(()(()))', '(())(())', '()(()())', '((())())', '()((()))', '((()))()', '((()()))', '(((())))'] if i not in BalancedParentheses(4)])
-# print((BalancedParentheses(3)))
-# print((BalancedParentheses(2)))
-# print((BalancedParentheses(1)))
+
+# print(Football([1]))
+# print(Football([3, 2]))
+# print(Football([1, 3, 2]))
+# print(Football([1, 7, 5, 3, 9]))
+# print(Football([9, 5, 3, 7, 1]))
+# print(Football([1, 4, 3, 2, 5]))
+# print(Football([1, 5, 4, 3, 2, 6]))
+# print(Football([1, 5, 4, 3, 2, 7, 6]))
