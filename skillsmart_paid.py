@@ -1,5 +1,5 @@
 def Football(F:list, N:int) -> bool:
-    if len(F)<=1: return False
+    if len(F)<=1 or sorted(F) == F: return False
     dict_orig = {i: val for i, val in enumerate(F)}
     dict_sort = {i: val for i, val in sorted(dict_orig.items(), key=lambda x: x[1])}
     lst_diff = [list(dict_orig.keys())[i] - list(dict_sort.keys())[i] for i in range(len(F))]
@@ -21,6 +21,7 @@ def Football(F:list, N:int) -> bool:
     return False
 
 
+# print(Football([1, 2, 3], 3))
 # print(Football([1]))
 # print(Football([3, 2]))
 # print(Football([1, 3, 2]))
