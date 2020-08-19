@@ -6,4 +6,5 @@ def Keymaker(k:int) -> str:
     return ''.join(lst_door)
 
 # for i in range(51):
-#     print (Keymaker(i))
+#print (Keymaker(i))
+#print (Keymaker(i))
