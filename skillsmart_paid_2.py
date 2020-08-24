@@ -1,49 +1,67 @@
-""" Задание
-Дополните два класса, которые вы спроектировали в предыдущем задании, методами, подходящими для логики работы с ними. """
+"""5. Задания
+5.1. Разделите видимость полей и методов в каком-нибудь классе вашей программы. Сделайте все поля приватными, и напишите методы работы с ними.
+5.2. Постройте небольшую иерархию классов в вашей программе. """
+
+# попробуем нарисовать мини скелет будущей программы мониторинга IP устройств
 class device:
-    def __init__(self, vendor, type, model, version):
-        self.vendor = vendor
-        self.type = type
-        self.model = model
-        self.version = version
+    def __init__(self, name, vendor='', type='unknown', model=''):
+        self.__name = name
+        self.__vendor = vendor
+        self.__type = type
+        self.__model = model
 
-    def upgrade(self, new_version):
-        self.version = new_version
+    def get_name(self):
+        return self.__name
+    def set_name(self, new_name):
+        self.__name = new_name
+    def get_vendor(self):
+        return self.__vendor
+    def set_vendor(self, v):
+        self.__vendor = v
+    def get_type(self):
+        return self.__type
 
-    def swap(self, new_vendor, new_model, new_version):
-        self.vendor = new_vendor
-        self.model = new_model
-        self.version = new_version
 
-#вот тут я не очень удачно выбрал пример, потому как у объекта данного класса предполагается изменение самих атрибутов
-class interface:
-    def __init__(self, int_type, type = 'GigabitEthernet', sub=None, encapsulation='dot1q', description='', ip_address = None, rate_limit=0):
-        self.type = type
-        self.int_type = int_type
-        self.sub = sub
-        self.encapsulation = encapsulation
-        self.description = description
-        self.ip_address = ip_address
-        self.rate_limit = rate_limit
+class IP_device(device):
+    # а иной способ добавления атрибутов к атрибутам класса-родителя есть?
+    # а то этот как то "режет" взгляд
+    def __init__(self, name, ip_address, vendor='', type='', model=''):
+        super().__init__(name, vendor, type, model)
+        self.__ip_address = ip_address
 
-    def create_config(self):
-        print('interface ' + self.type + '.' + str(self.sub))
-        print('vlan-type ' + self.encapsulation + ' ' + str(self.sub))
-        print('description' + self.description)
-        print('ip address '+ str(self.ip_address))
-        print('qos car cir ' + str(self.rate_limit) + ' inbound')
-        print('qos car cir ' + str(self.rate_limit) + ' outbound')
+    def get_ip_address(self):
+        return self.__ip_address
+    def set_ip_address(self, ip_address):
+        self.__ip_address = ip_address
 
-    def delete(self):
-        self.type = ''
-        self.int_type = ''
-        self.sub = None
-        self.encapsulation = ''
-        self.description = ''
-        self.ip_address = None
-        self.rate_limit = 0
 
-interface1 = interface('L3', description='some_test_service', sub=300, ip_address='10.0.0.1 30', rate_limit=10000)
-interface1.create_config()
-interface1.delete()
-interface1.create_config()
+class IP_not_device(device):
+    #здесь пока не придумал конкретные методы
+    pass
+
+class router(IP_device):
+    def set_type(self):
+        self.__type = 'router'
+
+class switch(IP_device):
+    def set_type(self):
+        self.__type = 'switch'
+
+
+class wireless(IP_device):
+    def set_type(self):
+        self.__type = 'wireless'
+
+
+device1 = IP_device('some_device1', '10.0.0.1')
+device2 = IP_not_device('some_device_wo_IP')
+device3 = router('router1', '10.0.0.3')
+
+print(device1.get_name(), device1.get_ip_address(), device1.get_type())
+print(device2.get_name(), device2.get_type())
+print(device3.get_name(), device3.get_ip_address(), device3.get_type())
+
+device3.set_type()
+
+#здесь я не понял, почему тип устройства не поменялся, метод set_type в подклассе router не верный?
+print(device3.get_name(), device3.get_ip_address(), device3.get_type())
