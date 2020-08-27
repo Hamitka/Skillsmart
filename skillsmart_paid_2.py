@@ -1,67 +1,30 @@
-"""5. Задания
-5.1. Разделите видимость полей и методов в каком-нибудь классе вашей программы. Сделайте все поля приватными, и напишите методы работы с ними.
-5.2. Постройте небольшую иерархию классов в вашей программе. """
+# -*- coding: utf8 -*-
+"""3. Задание
+Подготовьте иерархию из трёх классов -- один родительский, и два наследника. В родительском классе сделайте метод, условно, foo(), а в дочерних классах переопределите его. В каждой из трёх реализаций foo() выводите в консоль что-то оригинальное, чтобы можно было различить, для какого класса foo() вызывается.
+Создайте список из 10 объектов, где будут случайно перемешаны 10 объектов двух дочерних классов, и в цикле, не зная где какой объект, вызывайте foo().
+Не забывайте, что объекты обычным присваиванием не копируются.
+Почему получится такой вывод? """
 
-# попробуем нарисовать мини скелет будущей программы мониторинга IP устройств
-class device:
-    def __init__(self, name, vendor='', type='unknown', model=''):
-        self.__name = name
-        self.__vendor = vendor
-        self.__type = type
-        self.__model = model
-
-    def get_name(self):
-        return self.__name
-    def set_name(self, new_name):
-        self.__name = new_name
-    def get_vendor(self):
-        return self.__vendor
-    def set_vendor(self, v):
-        self.__vendor = v
-    def get_type(self):
-        return self.__type
+import random
 
 
-class IP_device(device):
-    # а иной способ добавления атрибутов к атрибутам класса-родителя есть?
-    # а то этот как то "режет" взгляд
-    def __init__(self, name, ip_address, vendor='', type='', model=''):
-        super().__init__(name, vendor, type, model)
-        self.__ip_address = ip_address
-
-    def get_ip_address(self):
-        return self.__ip_address
-    def set_ip_address(self, ip_address):
-        self.__ip_address = ip_address
+class Parent:
+    def say(self):
+        print('Im the BOSS')
 
 
-class IP_not_device(device):
-    #здесь пока не придумал конкретные методы
-    pass
-
-class router(IP_device):
-    def set_type(self):
-        self.__type = 'router'
-
-class switch(IP_device):
-    def set_type(self):
-        self.__type = 'switch'
+class Daughter(Parent):
+    def say(self):
+        print('Im daughter')
 
 
-class wireless(IP_device):
-    def set_type(self):
-        self.__type = 'wireless'
+class Son(Parent):
+    def say(self):
+        print('Im son')
 
 
-device1 = IP_device('some_device1', '10.0.0.1')
-device2 = IP_not_device('some_device_wo_IP')
-device3 = router('router1', '10.0.0.3')
+list_child = [random.choice([Daughter(), Son()]) for _ in range(10)]
 
-print(device1.get_name(), device1.get_ip_address(), device1.get_type())
-print(device2.get_name(), device2.get_type())
-print(device3.get_name(), device3.get_ip_address(), device3.get_type())
+[i.say() for i in list_child]
 
-device3.set_type()
-
-#здесь я не понял, почему тип устройства не поменялся, метод set_type в подклассе router не верный?
-print(device3.get_name(), device3.get_ip_address(), device3.get_type())
+#а то именно в выводе надо объячнить?
