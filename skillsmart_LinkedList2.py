@@ -23,27 +23,27 @@ class LinkedList2:
     # 2.1. Добавьте в класс LinkedList2 метод поиска первого узла по его значению.
     def find(self, val):
         # return None # здесь будет ваш код
-        if self.tail is None:
+        if self.head is None:
             # print("LinkedList is empty")
             return None
-        node = self.tail
+        node = self.head
         while node:
             if node.value == val:
                 return node
-            node = node.prev
+            node = node.next
         return None
 
     # 2.2. Добавьте в класс LinkedList2 метод поиска всех узлов по конкретному значению (возвращается список найденных узлов).
     def find_all(self, val):
         listOfFind = []
-        if self.tail is None:
+        if self.head is None:
             # print("LinkedList is empty")
             return listOfFind
-        node = self.tail
+        node = self.head
         while node is not None:
             if node.value == val:
                 listOfFind.append(node)
-            node = node.prev
+            node = node.next
         return listOfFind  # здесь будет ваш код
 
     # 2.3. Добавьте в класс LinkedList2 метод удаления одного узла по его значению.
@@ -52,36 +52,35 @@ class LinkedList2:
     def delete(self, val, all=False):
         # pass # здесь будет ваш
         i = 0
-        if self.tail is None:
+        if self.head is None:
             # print("LinkedList is empty")
             return None
-        if self.tail.value == val:
-            while self.tail.value == val:
-                self.tail = self.tail.prev
+        if self.head.value == val:
+            while self.head.value == val:
+                self.head = self.head.next
                 i += 1
                 if not all:
-                    if self.tail is None:
-                        self.head = None
+                    if self.head is None:
+                        self.tail = None
                     return None
-                if self.tail is None:
-                    self.head = None
+                if self.head is None:
+                    self.tail = None
                     return None
-            node = self.tail
-            nodePrev = self.tail.prev
-            while nodePrev:
-                if nodePrev.value == val:
-                    # nodePrev = node
-                    node.prev = nodePrev.prev
-                    nodePrev = nodePrev.prev
+            node = self.head
+            nodeNext = self.head.next
+            while nodeNext:
+                if nodeNext.value == val:
+                    node.next = nodeNext.next
+                    nodeNext = nodeNext.next
                     i += 1
                     if not all:
                         return None
                 else:
                     # nodePrev = node
-                    node = node.prev
-                    nodePrev = nodePrev.prev
-                if node.prev is None:
-                    self.head = node
+                    node = node.next
+                    nodeNext = nodeNext.next
+                if node.nodeNext is None:
+                    self.tail = node
         if i == 0:
             pass
             # print("this value is not in LinkedList")
@@ -90,20 +89,20 @@ class LinkedList2:
     # 2.7. Добавьте в класс LinkedList2 метод очистки всего содержимого (создание пустого списка) -- clean()
     def clean(self):
         # pass # здесь будет ваш код
-        if self.tail is None:
+        if self.head is None:
             # print("LinkedList is already empty")
             pass
         else:
-            self.tail = None
             self.head = None
+            self.tail = None
 
     # 2.8. Добавьте в класс LinkedList2 метод вычисления текущей длины списка -- len()
     def len(self):
-        node = self.tail
+        node = self.head
         i = 0
         while node is not None:
             i += 1
-            node = node.prev
+            node = node.next
         return i  # здесь будет ваш код
 
     # 2.5. Добавьте в класс LinkedList2 метод вставки узла после заданного узла.
@@ -147,16 +146,16 @@ class LinkedList2:
         newNode.next = node
         node.prev = newNode
 
-    # def print_forward_and_back(self):
-    #     node = self.head
-    #     print("→", end=" ")
-    #     while node:
-    #         print(node.value, end=" ")
-    #         node = node.next
-    #
-    #     node = self.tail
-    #     print("←", end=" ")
-    #     while node:
-    #         print(node.value, end=" ")
-    #         node = node.prev
-    #     print("")
+    def print_forward_and_back(self):
+        node = self.head
+        print("→", end=" ")
+        while node:
+            print(node.value, end=" ")
+            node = node.next
+
+        node = self.tail
+        print("←", end=" ")
+        while node:
+            print(node.value, end=" ")
+            node = node.prev
+        print("")

@@ -44,7 +44,7 @@ class MyTestCase(unittest.TestCase):
 
         self.assertEqual(len(testList2.find_all(22)), 4)
 
-    def test_LinkedList2_delete_last(self):
+    def test_LinkedList2_delete_first(self):
         testList2 = ll2.LinkedList2()
         testList2.add_in_tail(ll2.Node(22))
         testList2.add_in_tail(ll2.Node(11))
@@ -55,35 +55,33 @@ class MyTestCase(unittest.TestCase):
         testList2.add_in_tail(ll2.Node(44))
         testList2.add_in_tail(ll2.Node(22))
 
+        testList2.print_forward_and_back()
         testList2.delete(22)
-        self.assertEqual(testList2.tail.value, 44)
-        self.assertEqual(testList2.tail.prev.value, 33)
-        self.assertEqual(testList2.tail.prev.prev.value, 22)
-        self.assertEqual(testList2.tail.prev.prev.prev.value, 55)
-        self.assertEqual(testList2.tail.prev.prev.prev.prev.value, 22)
-        self.assertEqual(testList2.tail.prev.prev.prev.prev.prev.value, 11)
-        self.assertEqual(testList2.tail.prev.prev.prev.prev.prev.prev.value, 22)
+        testList2.print_forward_and_back()
+        self.assertEqual(testList2.head.value, 11)
+
+
         self.assertEqual(testList2.head.value, 22)
 
-    def test_LinkedList2_delete_all(self):
-        testList2 = ll2.LinkedList2()
-        testList2.delete(22)
-        testList2.delete(22, True)
-        testList2.add_in_tail(ll2.Node(22))
-        testList2.add_in_tail(ll2.Node(11))
-        testList2.add_in_tail(ll2.Node(22))
-        testList2.add_in_tail(ll2.Node(55))
-        testList2.add_in_tail(ll2.Node(22))
-        testList2.add_in_tail(ll2.Node(33))
-        testList2.add_in_tail(ll2.Node(44))
-        testList2.add_in_tail(ll2.Node(22))
-
-        testList2.delete(22, True)
-        self.assertEqual(testList2.tail.value, 44)
-        self.assertEqual(testList2.tail.prev.value, 33)
-        self.assertEqual(testList2.tail.prev.prev.value, 55)
-        self.assertEqual(testList2.tail.prev.prev.prev.value, 11)
-        self.assertEqual(testList2.head.value, 11)
+    # def test_LinkedList2_delete_all(self):
+    #     testList2 = ll2.LinkedList2()
+    #     testList2.delete(22)
+    #     testList2.delete(22, True)
+    #     testList2.add_in_tail(ll2.Node(22))
+    #     testList2.add_in_tail(ll2.Node(11))
+    #     testList2.add_in_tail(ll2.Node(22))
+    #     testList2.add_in_tail(ll2.Node(55))
+    #     testList2.add_in_tail(ll2.Node(22))
+    #     testList2.add_in_tail(ll2.Node(33))
+    #     testList2.add_in_tail(ll2.Node(44))
+    #     testList2.add_in_tail(ll2.Node(22))
+    #
+    #     testList2.delete(22, True)
+    #     self.assertEqual(testList2.tail.value, 44)
+    #     self.assertEqual(testList2.tail.prev.value, 33)
+    #     self.assertEqual(testList2.tail.prev.prev.value, 55)
+    #     self.assertEqual(testList2.tail.prev.prev.prev.value, 11)
+    #     self.assertEqual(testList2.head.value, 11)
 
     def test_LinkedList2_clean_and_len(self):
         testList2 = ll2.LinkedList2()
@@ -116,14 +114,14 @@ class MyTestCase(unittest.TestCase):
 
         testList2.clean()
         testList2.insert(None, ll2.Node(88))
-        # testList2.print_forward_and_back()
+        testList2.print_forward_and_back()
         # print (f'one Node {testList2.head.value} {testList2.head.next} {testList2.tail.value}')
         self.assertEqual(testList2.find(88), testList2.head)
         self.assertEqual(testList2.head.value, 88)
         self.assertEqual(testList2.tail.value, 88)
 
         testList2.insert(None, ll2.Node(99))
-        # testList2.print_forward_and_back()
+        testList2.print_forward_and_back()
         # print (f'two Node {testList2.head.value} {testList2.head.next.value} {testList2.tail.value}')
         self.assertEqual(testList2.find(99), testList2.tail)
         self.assertEqual(testList2.find(99), testList2.head.next)
@@ -134,7 +132,7 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(testList2.tail.prev.value, 88)
 
         testList2.insert(None, ll2.Node(111))
-        # testList2.print_forward_and_back()
+        testList2.print_forward_and_back()
         # print (f'three Node {testList2.head.value} {testList2.head.next.value} {testList2.tail.value}')
         self.assertEqual(testList2.find(111), testList2.tail)
         self.assertEqual(testList2.head.value, 88)
@@ -145,10 +143,10 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(testList2.tail.prev.prev.value, 88)
 
         testList2.insert(None, ll2.Node(122))
-        # testList2.print_forward_and_back()
+        testList2.print_forward_and_back()
 
         testList2.insert(testList2.find(88), ll2.Node(90))
-        # testList2.print_forward_and_back()
+        testList2.print_forward_and_back()
         # self.assertEqual(testList2.head.value, 88)
         # self.assertEqual(testList2.head.next.value, 90)
         # self.assertEqual(testList2.head.next.next.value, 99)
@@ -161,10 +159,10 @@ class MyTestCase(unittest.TestCase):
         # self.assertEqual(testList2.tail.prev.prev.prev.value, 88)
 
         testList2.insert(testList2.find(99), ll2.Node(101))
-        # testList2.print_forward_and_back()
+        testList2.print_forward_and_back()
 
         testList2.insert(testList2.find(122), ll2.Node(133))
-        # testList2.print_forward_and_back()
+        testList2.print_forward_and_back()
 
     def test_LinkedList2_add_in_head(self):
         testList2 = ll2.LinkedList2()

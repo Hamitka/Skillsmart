@@ -5,6 +5,6 @@ def Keymaker(k:int) -> str:
             lst_door[j] = '1' if lst_door[j] == '0' else '0'
     return ''.join(lst_door)
 
-# for i in range(51):
-#print (Keymaker(i))
-#print (Keymaker(i))
+for i in range(51):
+    print (Keymaker(i))
+# print (Keymaker(i))
