@@ -12,13 +12,13 @@ def in_string2(string1: str, string2: str):
     elif string1 == string2:
         return True
     i = j = 0
-    while i < len_str1 and j< len_str2:
+    while i < len_str1 and j < len_str2:
         if string1[i] != string2[j]:
-            i+=1
+            if j>0: i-=1
             j=0
         else:
-            i+=1
             j+=1
+        i+=1
     if j == len_str2:
         return True
     return False
@@ -45,4 +45,6 @@ print(in_string('345', '12345'))
 print(in_string2('345', '12345'))
 print(in_string('345678', '56789'))
 print(in_string2('345678', '56789'))
+print(in_string('допдопа', 'допа'))
+print(in_string2('допдопа', 'допа'))
 
