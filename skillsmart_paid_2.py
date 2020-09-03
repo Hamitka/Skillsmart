@@ -11,14 +11,14 @@ def in_string3(string1: str, string2: str):
         return False
     elif string1 == string2:
         return True
-    for i in range(len_str1):
-        if string1[i] == string2[0] and len_str1-i >= len_str2:
-            for j in range(1, len_str2):
-                if string1[i+j] != string2[j]:
-                    break
-                if j == len_str2-1:
-                    return True
+    for i in range(len_str1 - len_str2 + 1):
+        for j in range(len_str2):
+            if string1[i + j] != string2[j]:
+                break
+            if j == len_str2 - 1:
+                return True
     return False
+
 
 def in_string2(string1: str, string2: str):
     len_str1, len_str2 = len(string1), len(string2)
@@ -29,14 +29,15 @@ def in_string2(string1: str, string2: str):
     i = j = 0
     while i < len_str1 and j < len_str2:
         if string1[i] != string2[j]:
-            if j>0: i-=1
-            j=0
+            if j > 0: i -= 1
+            j = 0
         else:
-            j+=1
-        i+=1
+            j += 1
+        i += 1
     if j == len_str2:
         return True
     return False
+
 
 def in_string(string1: str, string2: str):
     len_str1, len_str2 = len(string1), len(string2)
@@ -75,4 +76,3 @@ print(in_string3('345678', '56789'))
 print(in_string('допдопа', 'допа'))
 print(in_string2('допдопа', 'допа'))
 print(in_string3('допдопа', 'допа'))
-
