@@ -101,5 +101,3 @@ print(in_string('допдопа', 'допа'))
 print(in_string2('допдопа', 'допа'))
 print(in_string3('допдопа', 'допа'))
 print(in_string4('допдопа', 'допа'))
-
-
