@@ -14,32 +14,49 @@ def get_random_string(length) -> string:
 class MyTestCase(unittest.TestCase):
     #в данной конкретной задаче проверку своих функций можно проверять и встроенными, к пример "in"
     def test_something1(self):
-        self.assertEqual(slp2.in_string4('12345', '234'), True)
-        self.assertEqual(slp2.in_string3('12345', '234'), ('234' in '1234'))
-        self.assertEqual(slp2.in_string2('12345', '234'), ('234' in '1234'))
+        test_string1, test_string2 = '12345', '234'
+        self.assertEqual(slp2.in_string4(test_string1, test_string2), True)
+        self.assertEqual(slp2.in_string3(test_string1, test_string2), (test_string2 in test_string1))
+        self.assertEqual(slp2.in_string2(test_string1, test_string2), (test_string2 in test_string1))
 
     def test_something2(self):
-        self.assertEqual(slp2.in_string4('12345', '3456'), False)
-        self.assertEqual(slp2.in_string3('12345', '3456'), ('3456' in '1234'))
-        self.assertEqual(slp2.in_string2('12345', '3456'), ('3456' in '1234'))
+        test_string1, test_string2 = '12345', '3456'
+        self.assertEqual(slp2.in_string4(test_string1, test_string2), False)
+        self.assertEqual(slp2.in_string3(test_string1, test_string2), (test_string2 in test_string1))
+        self.assertEqual(slp2.in_string2(test_string1, test_string2), (test_string2 in test_string1))
 
     def test_something3(self):
-        self.assertEqual(slp2.in_string4('1231234', '1234'), True)
-        self.assertEqual(slp2.in_string3('1231234', '1234'), ('1234' in '1231234'))
-        self.assertEqual(slp2.in_string2('1231234', '1234'), ('1234' in '1231234'))
+        test_string1, test_string2 = '1231234', '1234'
+        self.assertEqual(slp2.in_string4(test_string1, test_string2), True)
+        self.assertEqual(slp2.in_string3(test_string1, test_string2), (test_string2 in test_string1))
+        self.assertEqual(slp2.in_string2(test_string1, test_string2), (test_string2 in test_string1))
 
     def test_something4(self):
-        self.assertEqual(slp2.in_string4('1231234', '1234'), True)
-        self.assertEqual(slp2.in_string3('1231234', '1234'), ('1234' in '1231234'))
-        self.assertEqual(slp2.in_string2('1231234', '1234'), ('1234' in '1231234'))
+        test_string1, test_string2 = '', ''
+        self.assertEqual(slp2.in_string4(test_string1, test_string2), True)
+        self.assertEqual(slp2.in_string3(test_string1, test_string2), (test_string2 in test_string1))
+        self.assertEqual(slp2.in_string2(test_string1, test_string2), (test_string2 in test_string1))
 
     def test_something5_random(self):
-        for i in range(1, 10000):
+        for i in range(1, 1000):
             string1 = get_random_string(random.randint(1, 1000))
-            string2 = get_random_string(random.randint(1, 1000))
+            string2 = get_random_string(random.randint(1, 100))
             self.assertEqual(slp2.in_string4(string1, string2), (string2 in string1))
             self.assertEqual(slp2.in_string3(string1, string2), (string2 in string1))
             self.assertEqual(slp2.in_string2(string1, string2), (string2 in string1))
+
+    def test_something6_random(self):
+        test_string1, test_string2 = '1234', ''
+        self.assertEqual(slp2.in_string4(test_string1, test_string2), True)
+        self.assertEqual(slp2.in_string3(test_string1, test_string2), (test_string2 in test_string1))
+        self.assertEqual(slp2.in_string2(test_string1, test_string2), (test_string2 in test_string1))
+
+    def test_something7_random(self):
+        test_string1, test_string2 = '', '1234'
+        self.assertEqual(slp2.in_string4(test_string1, test_string2), False)
+        self.assertEqual(slp2.in_string3(test_string1, test_string2), (test_string2 in test_string1))
+        self.assertEqual(slp2.in_string2(test_string1, test_string2), (test_string2 in test_string1))
+
 
 if __name__ == '__main__':
     unittest.main()

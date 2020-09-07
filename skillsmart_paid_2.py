@@ -11,6 +11,10 @@ def in_string4(string1: str, string2: str):
         return False
     elif string1 == string2:
         return True
+    elif string2 == '':
+        return True
+    elif string1 == '':
+        return False
     k = 0
     for i in range(len_str1):
         if string1[i] == string2[k]:
@@ -29,6 +33,10 @@ def in_string3(string1: str, string2: str):
         return False
     elif string1 == string2:
         return True
+    elif string2 == '':
+        return True
+    elif string1 == '':
+        return False
     for i in range(len_str1 - len_str2 + 1):
         for j in range(len_str2):
             if string1[i + j] != string2[j]:
