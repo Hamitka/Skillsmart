@@ -38,24 +38,37 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(slp2.in_string2(test_string1, test_string2), (test_string2 in test_string1))
 
     def test_something5_random(self):
-        for i in range(1, 1000):
-            string1 = get_random_string(random.randint(1, 1000))
-            string2 = get_random_string(random.randint(1, 100))
+        for i in range(1, 100):
+            string1 = get_random_string(random.randint(1, 10000))
+            string2 = get_random_string(random.randint(1, 1000))
             self.assertEqual(slp2.in_string4(string1, string2), (string2 in string1))
             self.assertEqual(slp2.in_string3(string1, string2), (string2 in string1))
             self.assertEqual(slp2.in_string2(string1, string2), (string2 in string1))
 
-    def test_something6_random(self):
+    def test_something6(self):
         test_string1, test_string2 = '1234', ''
         self.assertEqual(slp2.in_string4(test_string1, test_string2), True)
         self.assertEqual(slp2.in_string3(test_string1, test_string2), (test_string2 in test_string1))
         self.assertEqual(slp2.in_string2(test_string1, test_string2), (test_string2 in test_string1))
 
-    def test_something7_random(self):
+    def test_something7(self):
         test_string1, test_string2 = '', '1234'
         self.assertEqual(slp2.in_string4(test_string1, test_string2), False)
         self.assertEqual(slp2.in_string3(test_string1, test_string2), (test_string2 in test_string1))
         self.assertEqual(slp2.in_string2(test_string1, test_string2), (test_string2 in test_string1))
+
+    def test_something8_big(self):
+        test_string1, test_string2 = get_random_string(10000000), 'xx'
+        self.assertEqual(slp2.in_string4(test_string1, test_string2), (test_string2 in test_string1))
+        self.assertEqual(slp2.in_string3(test_string1, test_string2), (test_string2 in test_string1))
+        self.assertEqual(slp2.in_string2(test_string1, test_string2), (test_string2 in test_string1))
+
+    def test_something9_big(self):
+        test_string1, test_string2 = get_random_string(10000000), get_random_string(3)
+        self.assertEqual(slp2.in_string4(test_string1, test_string2), (test_string2 in test_string1))
+        self.assertEqual(slp2.in_string3(test_string1, test_string2), (test_string2 in test_string1))
+        self.assertEqual(slp2.in_string2(test_string1, test_string2), (test_string2 in test_string1))
+        print (test_string2 in test_string1)
 
 
 if __name__ == '__main__':
