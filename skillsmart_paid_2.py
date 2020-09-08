@@ -1,111 +1,29 @@
-"""напишите функцию с двумя параметрами-строками. Функция возвращает булево значение,
-True если вторая строка содержится в первой строке как подстрока, и False в противном случае.
-Например,
-f("12345", "234") = True
-f("12345", "235") = False
-Для решения стандартные возможности типа s1 in s2 использовать нельзя, только условиями и циклами."""
+"""3. Задания
+3.1. Программно создайте 10 файлов с именами 1.txt, 2.txt, ..., 10.txt,
+и в каждый запишите три случайных числа, каждое с новой строки.
 
-def in_string4(string1: str, string2: str):
-    len_str1, len_str2 = len(string1), len(string2)
-    if len_str2 > len_str1:
-        return False
-    elif string1 == string2:
-        return True
-    elif string2 == '':
-        return True
-    elif string1 == '':
-        return False
-    k = 0
-    for i in range(len_str1):
-        if string1[i] == string2[k]:
-            k+=1
-        elif string1[i] == string2[0]:
-            k=1
-        else:
-            k=0
-        if k == len_str2:
-            return True
-    return False
+3.2. Напишите программу, которая получает на вход два случайных числа от 1 до 10,
+по этим числам открывает два соответствующих файла из задания выше, и возвращает сумму шести чисел (содержимое обоих файлов).
+Обрабатывайте ситуацию, когда содержимое файла неполно или испорчено. """
 
-def in_string3(string1: str, string2: str):
-    len_str1, len_str2 = len(string1), len(string2)
-    if len_str2 > len_str1:
-        return False
-    elif string1 == string2:
-        return True
-    elif string2 == '':
-        return True
-    elif string1 == '':
-        return False
-    for i in range(len_str1 - len_str2 + 1):
-        for j in range(len_str2):
-            if string1[i + j] != string2[j]:
-                break
-            if j == len_str2 - 1:
-                return True
-    return False
+import random
+path = 'some_files/'
+for i in  range(1, 11):
+    with open(path + str(i) + '.txt', 'w') as file:
+        for i in range(3):
+            file.write(str(random.randint(1, 100000))+'\n')
 
+lst_in = []
+for k in range(2):
+    j = random.randint(1, 10)
+    print('try to open file: ', j, '.txt', sep='')
+    with open(path + str(j) + '.txt') as file:
+        for data in file:
+            lst_in += [int(i) for i in [data.strip()] if i.isdigit()]
 
-def in_string2(string1: str, string2: str):
-    len_str1, len_str2 = len(string1), len(string2)
-    if len_str2 > len_str1:
-        return False
-    elif string1 == string2:
-        return True
-    i = j = 0
-    while i < len_str1 and j < len_str2:
-        if string1[i] != string2[j]:
-            if j > 0: i -= 1
-            j = 0
-        else:
-            j += 1
-        i += 1
-    if j == len_str2:
-        return True
-    return False
+#считается за?:
+#Обрабатывайте ситуацию, когда содержимое файла неполно или испорчено
+if len(lst_in) !=6:
+    print('--attention, in both file there are not 6 int values in total--')
+print ('sum of int values in two random files:', sum(lst_in))
 
-
-def in_string(string1: str, string2: str):
-    len_str1, len_str2 = len(string1), len(string2)
-    if len_str2 > len_str1:
-        return False
-    for i in range(len_str1):
-        if string1[i:i + len_str2] == string2:
-            return True
-    return False
-
-
-# print(in_string('12345', '234'))
-# print(in_string2('12345', '234'))
-# print(in_string3('12345', '234'))
-# print(in_string4('12345', '234'))
-# print('------')
-# print(in_string('1234511111111111', '1111'))
-# print(in_string2('1234511111111111', '1111'))
-# print(in_string3('1234511111111111', '1111'))
-# print(in_string4('1234511111111111', '1111'))
-# print('------')
-# print(in_string('12345', '2345'))
-# print(in_string2('12345', '2345'))
-# print(in_string3('12345', '2345'))
-# print(in_string4('12345', '2345'))
-# print('------')
-# print(in_string('12345', '235'))
-# print(in_string2('12345', '235'))
-# print(in_string3('12345', '235'))
-# print(in_string4('12345', '235'))
-# print('------')
-# print(in_string('345', '12345'))
-# print(in_string2('345', '12345'))
-# print(in_string3('345', '12345'))
-# print(in_string4('345', '12345'))
-# print('------')
-# print(in_string('345678', '56789'))
-# print(in_string2('345678', '56789'))
-# print(in_string3('345678', '56789'))
-# print(in_string4('345678', '56789'))
-# print('------')
-# print(in_string('допдопа', 'допа'))
-# print(in_string2('допдопа', 'допа'))
-# print(in_string3('допдопа', 'допа'))
-# print(in_string4('допдопа', 'допа'))
