@@ -8,35 +8,28 @@
 
 import random
 path = 'some_files/'
-# for i in  range(1, 11):
-#     with open(path + str(i) + '.txt', 'w') as file:
-#         for i in range(3):
-#             file.write(str(random.randint(1, 100000))+'\n')
+for i in  range(1, 11):
+    with open(path + str(i) + '.txt', 'w') as file:
+        for i in range(3):
+            file.write(str(random.randint(1, 100000))+'\n')
 
-lst_in = []
-for k in range(2):
-    j = random.randint(1, 2)
-    print('try to open file: ', j, '.txt', sep='')
-    with open(path + str(j) + '.txt') as file:
-        for data in file:
-            lst_in += [data.strip()]
-lst_out = []
+def sum_six():
+    lst_out = []
+    for k in range(2):
+        j = random.randint(1, 10)
+        print('try to open file: ', j, '.txt', sep='')
+        with open(path + str(j) + '.txt') as file:
+            try:
+                for i in range(3):
+                    lst_out += [int(file.readline().strip())]
+            except ValueError:
+                print('some in', j, 'file is not good')
+                return
 
-#Обрабатывайте ситуацию, когда содержимое файла неполно или испорчено.
-try:
-    for i in range(6):
-        lst_out += [int(lst_in[i])]
-except IndexError:
-    print ('more than 6 numbers')
-except ValueError:
-    print('\'', lst_in[i], '\'', 'is not numeric')
-else:
-    if len(lst_out) < 6:
-        print('less than 6 numbers')
-    elif len(lst_in) > 6:
-        print ('more than 6 numbers after second file')
-    else:
-        print('sum of int values in two random files:', sum(lst_out))
+    print('sum of int values in two random files:', sum(lst_out))
+
+sum_six()
+
 
 
 
