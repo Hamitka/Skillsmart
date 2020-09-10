@@ -23,12 +23,11 @@ def sum_six():
                 for i in range(3):
                     lst_out += [int(file.readline().strip())]
             except ValueError:
-                print('some in', j, 'file is not good')
-                return
+                return 'some in', j, 'file is not good'
 
-    print('sum of int values in two random files:', sum(lst_out))
+    return 'sum of int values in two random files:', sum(lst_out)
 
-sum_six()
+print(sum_six())
 
 
 
