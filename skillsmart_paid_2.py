@@ -1,34 +1,29 @@
-"""3. Задания
-3.1. Программно создайте 10 файлов с именами 1.txt, 2.txt, ..., 10.txt,
-и в каждый запишите три случайных числа, каждое с новой строки.
+"""4. Задания
+4.1. Напишите функцию, которая возвращает два списка: все файлы в текущем каталоге, включая файлы из его подкаталогов произвольной вложенности,
+и все каталоги в текущем каталоге, включая подкаталоги произвольной вложенности.
 
-3.2. Напишите программу, которая получает на вход два случайных числа от 1 до 10,
-по этим числам открывает два соответствующих файла из задания выше, и возвращает сумму шести чисел (содержимое обоих файлов).
-Обрабатывайте ситуацию, когда содержимое файла неполно или испорчено. """
+4.2. Напишите функцию, которая удаляет каталог (возможно, непустой) и все файлы внутри него.
+Если внутри каталога есть подкаталоги, ничего удалять не надо. """
+import os
+def dir_all(dir=os.getcwd()):
+    if not os.path.isdir(dir):
+        return None, 'No such directory'
+    lst_files, lst_dir = [], []
+    for i in os.walk(dir):
+        for k in i[2]:
+            lst_files += [i[0]+'\\'+ k]
+        for k in i[1]:
+            lst_dir += [i[0]+'\\'+ k]
+    return lst_files, lst_dir
 
-import random
-path = 'some_files/'
-for i in  range(1, 11):
-    with open(path + str(i) + '.txt', 'w') as file:
-        for i in range(3):
-            file.write(str(random.randint(1, 100000))+'\n')
-
-def sum_six():
-    lst_out = []
-    for k in range(2):
-        j = random.randint(1, 10)
-        print('try to open file: ', j, '.txt', sep='')
-        with open(path + str(j) + '.txt') as file:
-            try:
-                for i in range(3):
-                    lst_out += [int(file.readline().strip())]
-            except ValueError:
-                return 'some in', j, 'file is not good'
-
-    return 'sum of int values in two random files:', sum(lst_out)
-
-print(sum_six())
+def delenddir(dir):
+    lst_of_files, lst_of_dir = dir_all(dir)
+    if len(lst_of_dir) > 0:
+        return None, 'is some dir in dir'
+    for f in lst_of_files:
+        os.remove(f)
+    os.rmdir(dir)
 
 
-
-
+# print(dir_all('own_main\\test'))
+delenddir('own_main\\test')
