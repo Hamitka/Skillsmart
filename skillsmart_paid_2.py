@@ -18,9 +18,11 @@ def recursion_pow(N, M):
         return N * recursion_pow(N, M - 1)
 
 
-def recursion_sum_digit(K):
+def recursion_sum_digit(num: int):
     """вычисление суммы цифр числа"""
-    pass
+    if num // 10 == 0:
+        return num
+    return num % 10 + recursion_sum_digit(num // 10)
 
 
 def recursion_list_len(K):
@@ -50,3 +52,5 @@ def recursion_second_max(K):
 
 
 print(set([(recursion_pow(2, i) == pow(2, i)) for i in range(-50, 50)]))
+
+print(recursion_sum_digit(12345) == (1 + 2 + 3 + 4 + 5))
