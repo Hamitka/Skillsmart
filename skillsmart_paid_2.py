@@ -25,10 +25,13 @@ def recursion_sum_digit(num: int):
     return num % 10 + recursion_sum_digit(num // 10)
 
 
-def recursion_list_len(K):
+def recursion_list_len(some_list):
     """расчёт длины списка, для которого разрешена только одна операция удаления первого элемента pop(0)"""
-    pass
-
+    try:
+        some_list.pop(0)
+    except IndexError:
+        return 0
+    return 1 + recursion_list_len(some_list)
 
 def recursion_is_palindrome(K):
     """проверка, является ли строка палиндромом"""
@@ -54,3 +57,5 @@ def recursion_second_max(K):
 print(set([(recursion_pow(2, i) == pow(2, i)) for i in range(-50, 50)]))
 
 print(recursion_sum_digit(12345) == (1 + 2 + 3 + 4 + 5))
+
+print(recursion_list_len([2, 3, 4, 5, 6, 7, 8, 9]) == len([2, 3, 4, 5, 6, 7, 8, 9]))
