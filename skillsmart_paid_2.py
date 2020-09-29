@@ -1,25 +1,52 @@
-""" Задание
-Напишите функцию, которая получает на вход два параметра:
-имя файла архива и расширение файла, сканирует текущий каталог в поисках файлов с подходящим расширением,
-и добавляет их в архив (исходно этот архив не существует). """
-import os.path
-from zipfile import ZipFile
+"""Реализуйте с помощью рекурсии:
+1. возведение числа N в степень M;
+2. вычисление суммы цифр числа;
+3. расчёт длины списка, для которого разрешена только одна операция удаления первого элемента pop(0);
+4. проверка, является ли строка палиндромом;
+5. печать только чётных значений из списка;
+6. печать элементов списка с чётными индексами;
+7. нахождение второго максимального числа в списке (с учётом, что максимальных может быть несколько, если они равны). """
 
 
-def extfiletozip(zip_name: str, extention: str) -> bool:
-    """create new zip file with all files in current directory and given extension"""
-    lst_files = []
-    for root_dir_files in os.walk(os.getcwd()):
-        for file in root_dir_files[2]:
-            if os.path.splitext(file)[1] == extention and os.path.isfile(file):
-                lst_files += [file]
-    if not lst_files:
-        return False
-    # print (*lst_files, sep='\n')
-    with ZipFile(zip_name, 'w') as filezip:
-        for f in lst_files:
-            filezip.write(f)
-    return True
+def recursion_pow(N, M):
+    """возведение числа N в степень M"""
+    if M == 0:
+        return 1
+    elif M < 0:
+        return 1 / (N * 1 / recursion_pow(N, M + 1))
+    else:
+        return N * recursion_pow(N, M - 1)
 
 
-extfiletozip('test.zip', '.py')
+def recursion_sum_digit(K):
+    """вычисление суммы цифр числа"""
+    pass
+
+
+def recursion_list_len(K):
+    """расчёт длины списка, для которого разрешена только одна операция удаления первого элемента pop(0)"""
+    pass
+
+
+def recursion_is_palindrome(K):
+    """проверка, является ли строка палиндромом"""
+    pass
+
+
+def recursion_print_even_value(K):
+    """печать только чётных значений из списка"""
+    pass
+
+
+def recursion_print_even_index(K):
+    """печать элементов списка с чётными индексами"""
+    pass
+
+
+def recursion_second_max(K):
+    """нахождение второго максимального числа в списке
+    (с учётом, что максимальных может быть несколько, если они равны)"""
+    pass
+
+
+print(set([(recursion_pow(2, i) == pow(2, i)) for i in range(-50, 50)]))
