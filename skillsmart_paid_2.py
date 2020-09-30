@@ -33,9 +33,14 @@ def recursion_list_len(some_list):
         return 0
     return 1 + recursion_list_len(some_list)
 
-def recursion_is_palindrome(K):
+
+def recursion_is_palindrome(some_string: str):
     """проверка, является ли строка палиндромом"""
-    pass
+    some_string = some_string.replace(' ', '')
+    if len(some_string) <=1:
+        return True
+    return some_string[0] == some_string[-1] and recursion_is_palindrome(some_string[1:-1])
+
 
 
 def recursion_print_even_value(K):
@@ -59,3 +64,5 @@ print(set([(recursion_pow(2, i) == pow(2, i)) for i in range(-50, 50)]))
 print(recursion_sum_digit(12345) == (1 + 2 + 3 + 4 + 5))
 
 print(recursion_list_len([2, 3, 4, 5, 6, 7, 8, 9]) == len([2, 3, 4, 5, 6, 7, 8, 9]))
+
+print(recursion_is_palindrome('а роза упала на лапу азора'))
