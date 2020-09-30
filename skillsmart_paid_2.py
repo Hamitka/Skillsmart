@@ -43,10 +43,14 @@ def recursion_is_palindrome(some_string: str):
 
 
 
-def recursion_print_even_value(K):
+def recursion_print_even_value(some_list: list):
     """печать только чётных значений из списка"""
-    pass
-
+    if len(some_list) == 0:
+        return
+    temp = some_list.pop(0)
+    if temp % 2 == 0:
+        print(temp)
+    return recursion_print_even_value(some_list)
 
 def recursion_print_even_index(K):
     """печать элементов списка с чётными индексами"""
@@ -66,3 +70,5 @@ print(recursion_sum_digit(12345) == (1 + 2 + 3 + 4 + 5))
 print(recursion_list_len([2, 3, 4, 5, 6, 7, 8, 9]) == len([2, 3, 4, 5, 6, 7, 8, 9]))
 
 print(recursion_is_palindrome('а роза упала на лапу азора'))
+
+recursion_print_even_value([1, 2, 3, 4, 5, 6, 7, 8, 9])
