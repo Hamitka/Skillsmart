@@ -49,12 +49,18 @@ def recursion_print_even_value(some_list: list):
         return
     temp = some_list.pop(0)
     if temp % 2 == 0:
-        print(temp)
+        print(temp, end=' ')
     return recursion_print_even_value(some_list)
 
-def recursion_print_even_index(K):
+def recursion_print_even_index(some_list: list):
     """печать элементов списка с чётными индексами"""
-    pass
+    if len(some_list) == 0:
+        return
+    temp = len(some_list) - 1
+    if temp % 2 == 0:
+        print(some_list[temp], end=' ')
+    some_list.pop(temp)
+    return recursion_print_even_index(some_list)
 
 
 def recursion_second_max(K):
@@ -72,3 +78,5 @@ print(recursion_list_len([2, 3, 4, 5, 6, 7, 8, 9]) == len([2, 3, 4, 5, 6, 7, 8, 
 print(recursion_is_palindrome('а роза упала на лапу азора'))
 
 recursion_print_even_value([1, 2, 3, 4, 5, 6, 7, 8, 9])
+print()
+recursion_print_even_index([1, 2, 3, 4, 5, 6, 7, 8, 9])
