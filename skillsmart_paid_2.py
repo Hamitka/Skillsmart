@@ -45,7 +45,7 @@ def recursion_is_palindrome(some_string: str):
 
 def recursion_print_even_value(some_list: list):
     """печать только чётных значений из списка"""
-    if len(some_list) == 0:
+    if not some_list:
         return
     temp = some_list.pop(0)
     if temp % 2 == 0:
@@ -54,7 +54,7 @@ def recursion_print_even_value(some_list: list):
 
 def recursion_print_even_index(some_list: list):
     """печать элементов списка с чётными индексами"""
-    if len(some_list) == 0:
+    if not some_list:
         return
     temp = len(some_list) - 1
     if temp % 2 == 0:
@@ -63,10 +63,18 @@ def recursion_print_even_index(some_list: list):
     return recursion_print_even_index(some_list)
 
 
-def recursion_second_max(K):
+def recursion_second_max(some_list: list):
     """нахождение второго максимального числа в списке
     (с учётом, что максимальных может быть несколько, если они равны)"""
-    pass
+    if len(some_list) == 1:
+        return some_list[0]
+    max = recursion_second_max(some_list[1:])
+    if max > some_list[0]:
+        return max
+    else:
+        return some_list[0]
+    # return max if max > some_list[0] else some_list[0]
+
 
 
 print(set([(recursion_pow(2, i) == pow(2, i)) for i in range(-50, 50)]))
@@ -80,3 +88,5 @@ print(recursion_is_palindrome('а роза упала на лапу азора')
 recursion_print_even_value([1, 2, 3, 4, 5, 6, 7, 8, 9])
 print()
 recursion_print_even_index([1, 2, 3, 4, 5, 6, 7, 8, 9])
+print()
+print(recursion_second_max([1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4]))
