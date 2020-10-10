@@ -37,10 +37,9 @@ def recursion_list_len(some_list):
 def recursion_is_palindrome(some_string: str):
     """проверка, является ли строка палиндромом"""
     some_string = some_string.replace(' ', '')
-    if len(some_string) <=1:
+    if len(some_string) <= 1:
         return True
     return some_string[0] == some_string[-1] and recursion_is_palindrome(some_string[1:-1])
-
 
 
 def recursion_print_even_value(some_list: list):
@@ -51,6 +50,7 @@ def recursion_print_even_value(some_list: list):
     if temp % 2 == 0:
         print(temp, end=' ')
     return recursion_print_even_value(some_list)
+
 
 def recursion_print_even_index(some_list: list):
     """печать элементов списка с чётными индексами"""
@@ -63,18 +63,37 @@ def recursion_print_even_index(some_list: list):
     return recursion_print_even_index(some_list)
 
 
-def recursion_second_max(some_list: list):
-    """нахождение второго максимального числа в списке
-    (с учётом, что максимальных может быть несколько, если они равны)"""
+def recursion_max(some_list: list):
+    """нахождение максимального числа в списке"""
     if len(some_list) == 1:
         return some_list[0]
-    max = recursion_second_max(some_list[1:])
+    max = recursion_max(some_list[1:])
     if max > some_list[0]:
         return max
     else:
         return some_list[0]
-    # return max if max > some_list[0] else some_list[0]
 
+
+def recursion_second_max(some_list: list):
+    """нахождение второго максимального числа в списке
+    (с учётом, что максимальных может быть несколько, если они равны)"""
+    if len(some_list) == 2:
+        return min(some_list)
+    elif len(some_list) == 3:
+        some_list.remove(min(some_list))
+        return recursion_second_max(some_list)
+    else:
+        some_list.remove(min(some_list[:3]))
+        return recursion_second_max(some_list)
+
+
+def recursion_i_max(some_list: list, i: int):
+    """find some i max from list by recursion"""
+    if len(some_list) == i:
+        return min(some_list)
+    some_list.remove(min(some_list[:i+1]))
+    imax = recursion_i_max(some_list, i)
+    return imax
 
 
 print(set([(recursion_pow(2, i) == pow(2, i)) for i in range(-50, 50)]))
@@ -89,4 +108,8 @@ recursion_print_even_value([1, 2, 3, 4, 5, 6, 7, 8, 9])
 print()
 recursion_print_even_index([1, 2, 3, 4, 5, 6, 7, 8, 9])
 print()
+print(recursion_max([1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4]))
 print(recursion_second_max([1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4]))
+print(recursion_second_max([1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 10]))
+print(recursion_i_max([1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4], 3))
+print(recursion_i_max([1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4], 6))
