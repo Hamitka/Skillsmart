@@ -1,21 +1,19 @@
 import unittest
 import skillsmart_paid_2 as ssp2
-import random
-
-def gen_random_list_of_list(len_list: int):
-    return [[random.randint(0, 1000) for i in range(n)] for n in range(2, len_list)]
 
 class MyTestCase(unittest.TestCase):
-    def test_something(self):
-        test_lsts = gen_random_list_of_list(10)
-        [self.assertEqual(ssp2.second_max(test), sorted(test)[-2]) for test in test_lsts]
-        test_lsts2 = gen_random_list_of_list(10)
-        for test2 in test_lsts2:
-            self.assertEqual(ssp2.second_max(test2), sorted(test2)[-2])
+    def test_xml_value(self):
+        self.assertEqual(len(ssp2.get_xml_value(ssp2.root, 'name')), 1)
+        self.assertEqual(len(ssp2.get_xml_value(ssp2.root, 'age')), 1)
+        self.assertEqual(len(ssp2.get_xml_value(ssp2.root, 'sex')), 1)
+        self.assertEqual(len(ssp2.get_xml_value(ssp2.root, 'pc_item')), 4)
+        self.assertEqual(len(ssp2.get_xml_value(ssp2.root, 'language')), 3)
+        self.assertEqual(ssp2.get_xml_value(ssp2.root, 'pc_item'), ['Linux', 'Intel Core i7-8700', '64', '5000'])
 
-    def test_something2(self):
-        test_lst = [1, 2, 3]
-        self.assertEqual(ssp2.second_max(test_lst), sorted(test_lst)[-2])
+    def test_count_xml_attrib(self):
+        self.assertEqual(ssp2.count_xml_attrib(ssp2.root, 'name'), 7)
+        self.assertEqual(ssp2.count_xml_attrib(ssp2.root, ''), 0)
+
 
 
 if __name__ == '__main__':
