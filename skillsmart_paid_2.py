@@ -1,119 +1,31 @@
-"""Реализуйте с помощью рекурсии:
-1. возведение числа N в степень M;
-2. вычисление суммы цифр числа;
-3. расчёт длины списка, для которого разрешена только одна операция удаления первого элемента pop(0);
-4. проверка, является ли строка палиндромом;
-5. печать только чётных значений из списка;
-6. печать элементов списка с чётными индексами;
-7. нахождение второго максимального числа в списке (с учётом, что максимальных может быть несколько, если они равны). """
+"""
+userId -- это уникальный идентификатор пользователя,
+id -- уникальный идентификатор условной задачи для этого пользователя,
+title -- название этой задачи,
+completed -- показывает, выполнена эта задача или нет.
 
+7. Задания
+7.1. Сохраните JSON-набор, полученный через внешний API, в файл.
+7.2. Посчитайте количество уникальных пользователей в этом наборе.
+7.3. Посчитайте для каждого пользователя, сколько у него оригинальных задач, и сколько из них выполнено.
+"""
 
-def recursion_pow(N, M):
-    """возведение числа N в степень M"""
-    if M == 0:
-        return 1
-    elif M < 0:
-        return 1 / (N * 1 / recursion_pow(N, M + 1))
-    else:
-        return N * recursion_pow(N, M - 1)
+import json
+import requests
 
+with open("file.json", "w") as json_file:
+    response = requests.get("https://jsonplaceholder.typicode.com/todos")
+    json_file.write(response.text)
 
-def recursion_sum_digit(num: int):
-    """вычисление суммы цифр числа"""
-    if num // 10 == 0:
-        return num
-    return num % 10 + recursion_sum_digit(num // 10)
+with open("file.json", "r") as json_file:
+    result = json.load(json_file)
 
+users = {}
+for i in range(len(result)):
+    users.setdefault(result[i]["userId"], {"num": 0, "completed": 0})
+    users[result[i]["userId"]]["num"] += 1
+    if result[i]["completed"]:
+        users[result[i]["userId"]]["completed"] += 1
 
-def recursion_list_len(some_list):
-    """расчёт длины списка, для которого разрешена только одна операция удаления первого элемента pop(0)"""
-    try:
-        some_list.pop(0)
-    except IndexError:
-        return 0
-    return 1 + recursion_list_len(some_list)
-
-
-def recursion_is_palindrome(some_string: str):
-    """проверка, является ли строка палиндромом"""
-    some_string = some_string.replace(' ', '')
-    if len(some_string) <= 1:
-        return True
-    return some_string[0] == some_string[-1] and recursion_is_palindrome(some_string[1:-1])
-
-
-def recursion_print_even_value(some_list: list):
-    """печать только чётных значений из списка"""
-    if not some_list:
-        return
-    temp = some_list.pop(0)
-    if temp % 2 == 0:
-        print(temp, end=' ')
-    return recursion_print_even_value(some_list)
-
-
-def recursion_print_even_index(some_list: list):
-    """печать элементов списка с чётными индексами"""
-    if not some_list:
-        return
-    temp = len(some_list) - 1
-    if temp % 2 == 0:
-        print(some_list[temp], end=' ')
-    some_list.pop(temp)
-    return recursion_print_even_index(some_list)
-
-
-def recursion_max(some_list: list):
-    """нахождение максимального числа в списке"""
-    if len(some_list) == 1:
-        return some_list[0]
-    max = recursion_max(some_list[1:])
-    if max > some_list[0]:
-        return max
-    else:
-        return some_list[0]
-
-
-def recursion_second_max(some_list: list):
-    """нахождение второго максимального числа в списке
-    (с учётом, что максимальных может быть несколько, если они равны)"""
-    if not len(some_list):
-        return None
-    if len(some_list) == 2:
-        return min(some_list)
-    elif len(some_list) == 3:
-        some_list.remove(min(some_list))
-        return recursion_second_max(some_list)
-    else:
-        some_list.remove(min(some_list[:3]))
-        return recursion_second_max(some_list)
-
-
-def recursion_i_max(some_list: list, i: int):
-    """find some i max from list by recursion"""
-    if not len(some_list):
-        return None
-    if len(some_list) == i:
-        return min(some_list)
-    some_list.remove(min(some_list[:i + 1]))
-    imax = recursion_i_max(some_list, i)
-    return imax
-
-
-def second_max(some_list: list):
-    if not len(some_list):
-        return None
-    while len(some_list) > 3:
-        some_list.remove(min(some_list[:3]))
-    if len(some_list) == 3:
-        some_list.remove(min(some_list))
-    if len(some_list) == 2:
-        return min(some_list)
-    else:
-        return None
-
-
-# print(recursion_second_max([1, 2, 3]))
-# print(second_max([1, 2, 3]))
-#
-# print(recursion_second_max([1, 2, 3]) == second_max([1, 2, 3]))
+print('Количество всех пользоваталей %d' % (len(users.keys())))
+[print('Количество завершеных задач у пользователя %d равно %d из %d' % (i, users[i]["completed"], users[i]["num"])) for i in users.keys()]
