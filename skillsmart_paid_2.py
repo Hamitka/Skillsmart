@@ -1,58 +1,61 @@
-""" 6.6. Задания
-6.6.1. Напишите функцию, которая формирует список всех узлов по заданному тегу независимо от их глубины в XML-документе.
-На вход функция получает корневой узел.
-6.6.2. Напишите функцию, которая находит родителя заданного узла.
-6.6.3. Напишите функцию, которая удаляет все узлы по заданному тегу независимо от их глубины в XML-документе.
-6.6.4. Для трёх предыдущих функций напишите тесты.
+"""
+ Задание
+1. Самостоятельно разберитесь, как сделать из класса List2 итератор с конструктором,
+чтобы он работал не только начиная с 1, а с любого заданного значения, например:
+for n in List2(5): # начиная с 5
+    print(n)
+2. Напишите версию List2 с конструктором, который получает количество N итерируемых элементов (сейчас 10),
+и флажок конечности/бесконечности. В случае конечности List2 выдаёт N элементов и завершает работу,
+а в случае бесконечности начинает повторно выдавать свою последовательность с самого начала.
+3. Сделайте тесты для этих двух версий List2.
 """
 
-import xml.etree.ElementTree as ETree
 
-xml1 = ETree.parse('demo.xml')
-root = xml1.getroot()
+class List2:
+    def __init__(self, begin):
+        self.begin = begin
 
+    def __iter__(self):
+        self.start = self.begin
+        self.count = 0
+        return self
 
-# 6.6.1. Напишите функцию, которая формирует список всех узлов по заданному тегу независимо от их глубины в XML-документе.
-# На вход функция получает корневой узел.
+    def __next__(self):
+        current = self.start
+        self.start = self.start * 2
+        self.count += 1
+        if self.count < 10:
+            return current
+        raise StopIteration
 
-# через .iter
-def get_xml_node(xml_root, xml_tag: str):
-    xml_nodes = []
-    for item in xml_root.iter():
-        if item.tag == xml_tag:
-            xml_nodes += [item]
-    return xml_nodes
+class List2v2:
+    def __init__(self, begin, count_end, infinity=False):
+        self.begin = begin
+        self.count_end = count_end
+        self.infinity = infinity
 
+    def __iter__(self):
+        self.start = self.begin
+        self.count = 0
+        return self
 
-# через рекурсию
-def get_xml_node_rec(xml_root, xml_tag: str):
-    xml_nodes = []
-
-    def get_tag(xml_root):
-        for item in xml_root:
-            if not len(item):
-                if item.tag == xml_tag:
-                    xml_nodes.append(item)
-            else:
-                get_tag(item)
-
-    get_tag(xml_root)
-    return xml_nodes
-
-
-# 6.6.2. Напишите функцию, которая находит родителя заданного узла.
-def get_xml_parent(xml_root, xml_tag: str):
-    for item in xml_root.iter():
-        if item.find(xml_tag) is not None:
-            return item
-    return None
+    def __next__(self):
+        current = self.start
+        self.start = self.start * 2
+        self.count += 1
+        if self.count < self.count_end:
+            return current
+        raise StopIteration
 
 
-# 6.6.3. Напишите функцию, которая удаляет все узлы по заданному тегу независимо от их глубины в XML-документе.
-def del_xml_node(xml_root, xml_tag: str):
-    for item in xml_root.iter():
-        subitems = item.findall(xml_tag)
-        for i in subitems:
-            item.remove(i)
-    return xml_root
+# test_lst2 = List2(10)
+# test_iter_lst2 = iter(test_lst2)
+#
+# test_lst2v2 = List2v2(1, 20)
+# test_iter_lst2v2 = iter(test_lst2v2)
+#
+# for i in test_lst2:
+#     print(i)
 
+# for i in test_iter_lst2v2:
+#     print(i)
