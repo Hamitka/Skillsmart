@@ -44,25 +44,31 @@ class List2v2:
         current = self.start
         self.start = self.start * 2
         self.count += 1
-        if self.count <= self.count_end:
-            return current
+        if not self.infinity:
+            if self.count <= self.count_end:
+                return current
         else:
-            if self.infinity:
-                self.count = 0
-                self.start = self.begin
-                return
+            if self.count < self.count_end:
+                return current
+            else:
+                if self.infinity:
+                    self.count = 0
+                    self.start = self.begin
+                    return current
+
         raise StopIteration
 
 
 # test_lst2 = List2(10)
 # test_iter_lst2 = iter(test_lst2)
 #
+# for i in test_lst2:
+#     print(i)
+# next(test_iter_lst2)
+
 # test_lst2v2 = List2v2(10, 10, True)
 # test_iter_lst2v2 = iter(test_lst2v2)
 #
-# for i in test_lst2:
-#     print(i)
-
 # for i in test_iter_lst2v2:
 #     print(i)
 

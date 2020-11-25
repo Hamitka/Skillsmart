@@ -20,19 +20,23 @@ class MyTestCase(unittest.TestCase):
         for i in range(m):
             temp = next(itest_lst2)
             self.assertEqual(temp, n * (2 ** i))
-            print(temp, n * (2 ** i))
         self.assertRaises(StopIteration, next, itest_lst2)
 
     def test_List2v2_infinity(self):
         n = 10
-        m = 10
+        m = 3
         test_lst2 = ssp2.List2v2(n, m, True)
         itest_lst2 = iter(test_lst2)
         for i in range(m):
             temp = next(itest_lst2)
             self.assertEqual(temp, n * (2 ** i))
-            print(temp, n * (2 ** i))
-        self.assertEqual(next(itest_lst2), n)
+        self.assertEqual(next(itest_lst2), 10)
+        self.assertEqual(next(itest_lst2), 20)
+        self.assertEqual(next(itest_lst2), 40)
+        self.assertEqual(next(itest_lst2), 10)
+        self.assertEqual(next(itest_lst2), 20)
+        self.assertEqual(next(itest_lst2), 40)
+
 
 if __name__ == '__main__':
     unittest.main()
