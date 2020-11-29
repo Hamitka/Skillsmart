@@ -19,7 +19,7 @@ def lst_sum(some_list, name='', result=None):
     for v in some_list:
         sum += v
         # print(name)
-        # time.sleep(.00005)
+        time.sleep(.00005)
     if result is not None:
         result[name] = sum
     return sum
@@ -27,18 +27,25 @@ def lst_sum(some_list, name='', result=None):
 
 def lst_sum_thread(some_list, num_thread):
     result_dct = {}
+    list_thread = []
     size_part = len(some_list) // num_thread
     list_of_list = [some_list[i:i + size_part] for i in range(0, len(some_list), size_part)]
     for i, lst in enumerate(list_of_list):
         name = 'Thread N' + str(i)
         some_thread = Thread(target=lst_sum, name=name, args=(lst, name, result_dct))
+        list_thread.append(some_thread)
         some_thread.start()
         # print ('%s is start' % (name))
     # print(result_dct)
+    while True:
+        set_alive = set([thread.is_alive() for thread in list_thread])
+        if set_alive == {False}:
+            break
     sum_total = lst_sum(list(result_dct.values()))
     return sum_total
 
+
 list_float = [random() for _ in range(100000)]
 
-print(lst_sum_thread(list_float, 10), sum(list_float))
-print(lst_sum_thread(list_float, 10) == sum(list_float))
+print(lst_sum_thread(list_float, 9), sum(list_float))
+print(lst_sum_thread(list_float, 9) == sum(list_float))
