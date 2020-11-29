@@ -46,6 +46,9 @@ def lst_sum_thread(some_list, num_thread):
 
 
 list_float = [random() for _ in range(100000)]
+start = time.monotonic()
 test_sum = lst_sum_thread(list_float, 9)
+end = time.monotonic()
 print(test_sum, sum(list_float))
 print(test_sum == sum(list_float))
+print('time to execute: ', end - start)
