@@ -1,54 +1,33 @@
 """ Задание
-Напишите функцию, которая получает на вход большой список вещественных чисел
-(например, 10 тысяч элементов, сгенерируйте их случайным образом),
-и количество процессов (целое число), которое должно просуммировать этот массив по кусочкам.
-
-Например, задано количество процессов -- 10 и список из 100 000 элементов.
-Функция запускает 10 процессов, каждый из которых суммирует свой участок списка
-(по 10 000 элементов), суммирует их результаты и возвращает итоговую сумму всего списка.
-Не используйте в решении join().
-Проверьте корректность работы функции,
-сравнив её результат с результатом обычного суммирования массива циклом. """
-from random import random
-from threading import Thread
-import time
+Оформите последний код в функцию так, чтобы она работала с
+неограниченным количеством "одновременно" выполняющихся генераторов long_process
+(сейчас их три). В качестве входных данных этой функции используйте список
+из целых значений, которые сейчас служат вторым параметром функции long_process.
+Например, для последнего примера входным будет список [10, 100, 256]. """
 
 
-def lst_sum(some_list, name='', result=None):
+def long_process(id, n):
     sum = 0
-    for v in some_list:
-        sum += v
-        # print(name)
-        time.sleep(.00005)
-    if result is not None:
-        result[name] = sum
-    return sum
+    for x in range(n):
+        sum += x
+        print(id, sum)
+        if x < n - 1:
+            yield
+        else:
+            yield sum
 
 
-def lst_sum_thread(some_list, num_thread):
-    result_dct = {}
+def sum_thread(some_list: list):
+    R = {}
     list_thread = []
-    size_part = len(some_list) // num_thread
-    list_of_list = [some_list[i:i + size_part] for i in range(0, len(some_list), size_part)]
-    for i, lst in enumerate(list_of_list):
-        name = 'Thread N' + str(i)
-        some_thread = Thread(target=lst_sum, name=name, args=(lst, name, result_dct))
+    for i, num in enumerate(some_list):
+        name_thread = 'Thread N' + str(i)
+        some_thread = long_process(name_thread, num)
         list_thread.append(some_thread)
-        some_thread.start()
-        # print ('%s is start' % (name))
-    # print(result_dct)
-    while True:
-        set_alive = set([thread.is_alive() for thread in list_thread])
-        if set_alive == {False}:
-            break
-    sum_total = lst_sum(list(result_dct.values()))
-    return sum_total
+        R[some_thread] = None
+    for i in range(max(some_list)):
+        for key in R.keys():
+            if R[key] is None: R[key] = next(key)
+    return R
 
-
-list_float = [random() for _ in range(100000)]
-start = time.monotonic()
-test_sum = lst_sum_thread(list_float, 9)
-end = time.monotonic()
-print(test_sum, sum(list_float))
-print(test_sum == sum(list_float))
-print('time to execute: ', end - start)
+print(sum_thread([10, 100, 256, 512, 1024]))
