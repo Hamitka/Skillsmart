@@ -1,33 +1,33 @@
-""" Задание
-Оформите последний код в функцию так, чтобы она работала с
-неограниченным количеством "одновременно" выполняющихся генераторов long_process
-(сейчас их три). В качестве входных данных этой функции используйте список
-из целых значений, которые сейчас служат вторым параметром функции long_process.
-Например, для последнего примера входным будет список [10, 100, 256]. """
+"""5. Задания
+1. Проверьте по коду результата, что отправка данных с помощью POST на сервер httpbin.org пройдёт корректно.
+2. Выберите для эксперимента произвольный сайт и распарсьте из него интересующие вас значения. """
+
+import requests
+from bs4 import BeautifulSoup
+
+some_post = requests.post('http://httpbin.org/post', data={'UserId': '12345', 'Status': 'On'})
+if some_post.status_code == 200:
+    print('OK')
+else:
+    print('Some error %s' % (some_post.status_code,))
 
 
-def long_process(id, n):
-    sum = 0
-    for x in range(n):
-        sum += x
-        print(id, sum)
-        if x < n - 1:
-            yield
-        else:
-            yield sum
 
+some_response = requests.get('https://yandex.ru/pogoda/ufa')
+if some_response.status_code == 200:
+    # print(some_response.text)
+    # soup = BeautifulSoup(some_response.text, features="html5lib")
+    soup = BeautifulSoup(some_response.text, features='html.parser')
+    forecast_day_list = soup.find_all('div', {'class': 'forecast-briefly__name'})
+    forecast_date_list = soup.find_all('time', {'class': 'forecast-briefly__date'})
+    forecast_temp_day_list = soup.find_all('div', {'class': 'forecast-briefly__temp_day'})
+    forecast_temp_nigth_list = soup.find_all('div', {'class': 'forecast-briefly__temp_night'})
 
-def sum_thread(some_list: list):
-    R = {}
-    list_thread = []
-    for i, num in enumerate(some_list):
-        name_thread = 'Thread N' + str(i)
-        some_thread = long_process(name_thread, num)
-        list_thread.append(some_thread)
-        R[some_thread] = None
-    for i in range(max(some_list)):
-        for key in R.keys():
-            if R[key] is None: R[key] = next(key)
-    return R
-
-print(sum_thread([10, 100, 256, 512, 1024]))
+forecast_list = zip(forecast_day_list,
+                    forecast_date_list,
+                    forecast_temp_day_list,
+                    forecast_temp_nigth_list)
+for forecast in forecast_list:
+    for item in forecast:
+        print(item.text, end=' ')
+    print()
