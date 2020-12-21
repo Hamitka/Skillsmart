@@ -1,33 +1,22 @@
-"""5. Задания
-1. Проверьте по коду результата, что отправка данных с помощью POST на сервер httpbin.org пройдёт корректно.
-2. Выберите для эксперимента произвольный сайт и распарсьте из него интересующие вас значения. """
+import socket
 
-import requests
-from bs4 import BeautifulSoup
-
-some_post = requests.post('http://httpbin.org/post', data={'UserId': '12345', 'Status': 'On'})
-if some_post.status_code == 200:
-    print('OK')
-else:
-    print('Some error %s' % (some_post.status_code,))
-
-
-
-some_response = requests.get('https://yandex.ru/pogoda/ufa')
-if some_response.status_code == 200:
-    # print(some_response.text)
-    # soup = BeautifulSoup(some_response.text, features="html5lib")
-    soup = BeautifulSoup(some_response.text, features='html.parser')
-    forecast_day_list = soup.find_all('div', {'class': 'forecast-briefly__name'})
-    forecast_date_list = soup.find_all('time', {'class': 'forecast-briefly__date'})
-    forecast_temp_day_list = soup.find_all('div', {'class': 'forecast-briefly__temp_day'})
-    forecast_temp_nigth_list = soup.find_all('div', {'class': 'forecast-briefly__temp_night'})
-
-forecast_list = zip(forecast_day_list,
-                    forecast_date_list,
-                    forecast_temp_day_list,
-                    forecast_temp_nigth_list)
-for forecast in forecast_list:
-    for item in forecast:
-        print(item.text, end=' ')
-    print()
+# создаем объект типа socket, сетевой, датаграмм (т.е. по умолчанию с негарантиованной доставкой:
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+# Привязываем созданный объект к локальному IP, порт такой то:
+sock.bind(('localhost', 12345))
+# пока пустой список клиентов:
+client = []
+print('Start Server')
+while True:
+    # Кортеж из данных и адреса (IP, порт) исходя из полученного сообщения (размер не более 1024 Байт):
+    data, addres = sock.recvfrom(1024)
+    # Вывод в консоль IP и порт клиента, от которого принято сообщение:
+    print(addres[0], addres[1])
+    # Если клиент не в списке, добавить в список:
+    if addres not in client:
+        client.append(addres)
+    for clients in client:
+        # шлем сообщение всем клиентам, кроме клиента отправителя:
+        if clients == addres:
+            continue
+        sock.sendto(data, clients)
