@@ -11,13 +11,14 @@ def read_sok():
 
 # задаем кортеж из IP, порт сервера
 server = 'localhost', 12345
-# задаем свой иентификтор (ник)
+# задаем свой идентификатор (ник)
 alias = input()
 # создаем объект типа socket, сетевой, датаграмм (т.е. по умолчанию с негарантиованной доставкой:
-sor = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-# Привзяывем объект к динамическому (свободному) порту
+sor = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# Привязываем объект к динамическому (свободному) порту
 sor.bind(('', 0))
 # шлем на сервер для broadcast информациооное сообщение о присоединении к чату:
+sor.connect(server)
 sor.sendto((alias + ' Connect to server').encode('utf-8'), server)
 # создаем поток из созданной функции по приему сообщений
 potok = threading.Thread(target=read_sok)
