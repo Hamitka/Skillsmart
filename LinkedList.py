@@ -96,6 +96,9 @@ class LinkedList:
         1.6. Добавьте в класс LinkedList метод вставки узла newNode после заданного узла afterNode (из списка)
         Если afterNode = None, добавьте новый элемент первым в списке.
         """
+        if self.head is None:
+            self.add_in_tail(newNode)
+            return None
         if afterNode is None:
             newNode.next = self.head
             self.head = newNode

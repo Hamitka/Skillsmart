@@ -123,6 +123,12 @@ class MyTestCase(unittest.TestCase):
         temp_list.append(item_insert)
         self.compare_list_llist(temp_list, test_llist)
         self.assertEqual(temp_list[-1], test_llist.tail.value)
+        # insert into empty linked list:
+        test_llist.clean()
+        test_llist.insert(test_llist.find(89), ll.Node(item_insert))
+        self.assertEqual(item_insert, test_llist.head.value)
+        self.assertEqual(item_insert, test_llist.tail.value)
+
 
     def test_linked_list_addition(self):
         temp_list_1 = [1, 2, 3, 4, 5, 6, 7, 8]
