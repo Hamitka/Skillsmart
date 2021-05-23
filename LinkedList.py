@@ -4,6 +4,7 @@ class Node:
 
     def __init__(self, v):
         self.value = v
+        self.prev = None
         self.next = None
 
 
@@ -121,3 +122,84 @@ class LinkedList:
                 node_self, node_other = node_self.next, node_other.next
             return result
         return None
+
+
+class LinkedList2:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+    def add_in_tail(self, item):
+        if self.head is None:
+            self.head = item
+            item.prev = None
+            item.next = None
+        else:
+            self.tail.next = item
+            item.prev = self.tail
+        self.tail = item
+
+    def find(self, val):
+        """
+        2.1. Добавьте в класс LinkedList2 метод поиска первого узла по его значению.
+        """
+        node = self.head
+        while node:
+            if node.value == val:
+                return node
+            node = node.next
+        return None
+
+    def find_all(self, val):
+        """
+        2.2. Добавьте в класс LinkedList2 метод поиска всех узлов по конкретному значению
+        (возвращается список найденных узлов).
+        """
+        result = []
+        node = self.head
+        while node is not None:
+            if node.value == val:
+                result.append(node)
+            node = node.next
+        return result
+
+    def delete(self, val, all=False):
+        """
+        2.3. Добавьте в класс LinkedList2 метод удаления одного узла по его значению.
+        где флажок all=False по умолчанию -- удаляем только первый нашедшийся элемент.
+        2.4. Дополните этот метод удалением всех узлов по конкретному значению (флажок all=True).
+        """
+        while self.head and self.head.value == val:
+            self.head = self.head.next
+            # self.head.prev = None
+            if self.head is None: self.tail = None
+            if not all:
+                return None
+
+        node = self.head
+        while node is not None:
+            if node.value == val:
+                node.prev.next = node.next
+                if self.head is None: self.tail = None
+                if node == self.tail: self.tail = node.prev
+                if not all:
+                    return None
+            node = node.next
+        return None
+
+    def clean(self):
+        """
+        2.7. Добавьте в класс LinkedList2 метод очистки всего содержимого
+        (создание пустого списка) -- clean()
+        """
+        self.__init__()
+
+    def len(self):
+        return 0 # здесь будет ваш код
+
+    def insert(self, afterNode, newNode):
+        pass # здесь будет ваш код
+
+    def add_in_head(self, newNode):
+        pass # здесь будет ваш код
+
