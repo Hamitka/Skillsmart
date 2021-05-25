@@ -139,30 +139,30 @@ class LinkedList2:
             item.prev = self.tail
         self.tail = item
 
-    def print_all_nodes(self):
-        node = self.head
-        while node is not None:
-            print(node.value)
-            node = node.next
-
-    def print_all_nodes_reverse(self):
-        node = self.tail
-        while node is not None:
-            print(node.value)
-            node = node.prev
-
-    def print_all_nodes_both_row(self):
-        node = self.head
-        while node is not None:
-            print(node.value, end=' ')
-            node = node.next
-        print()
-        print('-' * 8)
-        node = self.tail
-        while node is not None:
-            print(node.value, end=' ')
-            node = node.prev
-        print()
+    # def print_all_nodes(self):
+    #     node = self.head
+    #     while node is not None:
+    #         print(node.value)
+    #         node = node.next
+    #
+    # def print_all_nodes_reverse(self):
+    #     node = self.tail
+    #     while node is not None:
+    #         print(node.value)
+    #         node = node.prev
+    #
+    # def print_all_nodes_both_row(self):
+    #     node = self.head
+    #     while node is not None:
+    #         print(node.value, end=' ')
+    #         node = node.next
+    #     print()
+    #     print('-' * 8)
+    #     node = self.tail
+    #     while node is not None:
+    #         print(node.value, end=' ')
+    #         node = node.prev
+    #     print()
 
     def find(self, val):
         """
