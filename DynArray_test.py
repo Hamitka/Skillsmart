@@ -56,16 +56,18 @@ class MyTestCase(unittest.TestCase):
         self.assertRaises(IndexError, dyn_array.insert, 100, 100)
 
     def test_dyn_array_delete(self):
-        i_start = 33
+        i_start = 333
         dyn_array = da.DynArray()
         [dyn_array.append(i) for i in range(i_start)]
         list_pattern = [i for i in range(i_start)]
         self.assertEqual(list_pattern, list(dyn_array))
+        # print(len(dyn_array), dyn_array.capacity)
 
         # del from end
         dyn_array.delete(i_start - 1)
         del list_pattern[i_start - 1]
         self.assertEqual(list_pattern, list(dyn_array))
+        # print(len(dyn_array), dyn_array.capacity)
 
         # del from begin
         dyn_array.delete(0)
@@ -82,10 +84,26 @@ class MyTestCase(unittest.TestCase):
             dyn_array.delete(0)
             del list_pattern[0]
             self.assertEqual(list_pattern, list(dyn_array))
+            self.assertLessEqual(16, dyn_array.capacity)
 
-            # del from unallowable index:
-            self.assertRaises(IndexError, dyn_array.delete, -1)
-            self.assertRaises(IndexError, dyn_array.delete, 100)
+        # del from unallowable index:
+        self.assertRaises(IndexError, dyn_array.delete, -1)
+        self.assertRaises(IndexError, dyn_array.delete, 100)
+
+    def test_dyn_array_delete_min_buffer(self):
+        # del from begin:
+        i_start = 16
+        dyn_array = da.DynArray()
+        [dyn_array.append(i) for i in range(i_start)]
+        list_pattern = [i for i in range(i_start)]
+        self.assertEqual(list_pattern, list(dyn_array))
+
+        for i in range(int(len(dyn_array))):
+            dyn_array.delete(0)
+            del list_pattern[0]
+            self.assertEqual(list_pattern, list(dyn_array))
+            self.assertEqual(16, dyn_array.capacity)
+            # print(len(dyn_array), dyn_array.capacity)
 
 
 if __name__ == '__main__':
