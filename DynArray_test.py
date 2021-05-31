@@ -92,17 +92,25 @@ class MyTestCase(unittest.TestCase):
 
     def test_dyn_array_delete_min_buffer(self):
         # del from begin:
-        i_start = 16
+        i_start = 46
         dyn_array = da.DynArray()
         [dyn_array.append(i) for i in range(i_start)]
         list_pattern = [i for i in range(i_start)]
         self.assertEqual(list_pattern, list(dyn_array))
+        self.assertEqual(64, dyn_array.capacity)
 
-        for i in range(int(len(dyn_array))):
+        for i in range(len(dyn_array) - 1):
             dyn_array.delete(0)
             del list_pattern[0]
             self.assertEqual(list_pattern, list(dyn_array))
-            self.assertEqual(16, dyn_array.capacity)
+        self.assertEqual(16, dyn_array.capacity)
+        self.assertEqual(1, dyn_array.count)
+
+        dyn_array.delete(0)
+        del list_pattern[0]
+        self.assertEqual(list_pattern, list(dyn_array))
+        self.assertEqual(16, dyn_array.capacity)
+        self.assertEqual(0, dyn_array.count)
             # print(len(dyn_array), dyn_array.capacity)
 
 
