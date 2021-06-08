@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-import Queue
+import Queue_my
 
 
 class MyTestCase(unittest.TestCase):
     def test_deque(self):
-        deque = Queue.Deque()
+        deque = Queue_my.Deque()
         deque.addTail(7)
         self.assertEqual(1, deque.size())
         deque.addTail(8)
