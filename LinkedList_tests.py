@@ -309,23 +309,28 @@ class MyTestCaseOrderList(unittest.TestCase):
         order_list.add(-1)
         order_list.add(-2)
         print([i.value for i in order_list.get_all()])
+        print(f'compare: {order_list.compare(order_list.head.value, order_list.tail.value)}')
+
         order_list.clean(False)
         for i in range(11):
             order_list.add(i)
         order_list.add(11)
         order_list.add(-1)
         print([i.value for i in order_list.get_all()])
+        print(f'compare: {order_list.compare(order_list.head.value, order_list.tail.value)}')
 
     def test_order_list_add_string(self):
-        order_list = ll.OrderedList(True)
+        order_list = ll.OrderedStringList(True)
         for i in 'qwertyuiop':
             order_list.add(i)
         print([i.value for i in order_list.get_all()])
+        print(f'compare: {order_list.compare(order_list.head.value, order_list.tail.value)}')
 
         order_list.clean(False)
         for i in 'qwertyuiop':
             order_list.add(i)
         print([i.value for i in order_list.get_all()])
+        print(f'compare: {order_list.compare(order_list.head.value, order_list.tail.value)}')
 
 
 if __name__ == '__main__':

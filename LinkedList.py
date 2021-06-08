@@ -305,7 +305,8 @@ class OrderedList:
             self.tail = item
             return
         node = self.head
-        if (self.__ascending and value <= node.value) or (not self.__ascending and value >= node.value):
+        if (self.__ascending and value <= node.value) or (
+                not self.__ascending and value >= node.value):
             self.head = item
             item.next = node
             node.prev = item
@@ -332,15 +333,19 @@ class OrderedList:
         while node:
             if node.value == val:
                 return node
-            elif self.__ascending and node.value > val:
-                return None
-            elif not self.__ascending and node.value < val:
+            elif (self.__ascending and node.value > val) or (
+                    not self.__ascending and node.value < val):
                 return None
             node = node.next
         return None
 
-    def delete(self, val):
-        pass  # здесь будет ваш код
+    def delete(self, val, all=False):
+        while self.head and self.head.value == val:
+            self.head = self.head.next
+            if self.head: self.head.prev = None
+            if self.head is None: self.tail = None
+            if not all:
+                return None
 
     def clean(self, asc):
         # self.__ascending = asc
@@ -373,6 +378,6 @@ class OrderedStringList(OrderedList):
     def __init__(self, asc):
         super(OrderedStringList, self).__init__(asc)
 
-    def compare(self, v1, v2):
-        # переопределённая версия для строк
-        return 0
+    # def compare(self, v1, v2):
+    #     # переопределённая версия для строк
+    #     return 0
