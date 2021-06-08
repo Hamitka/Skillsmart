@@ -285,5 +285,48 @@ class MyTestCase2(unittest.TestCase):
         self.common_tests(temp_list, test_llist2)
 
 
+class MyTestCaseOrderList(unittest.TestCase):
+
+    def test_order_list_add(self):
+        order_list = ll.OrderedList(True)
+        for i in range(3):
+            order_list.add(i)
+        self.assertEqual(0, order_list.head.value)
+        self.assertEqual(2, order_list.tail.value)
+        order_list.add(10)
+        self.assertEqual(10, order_list.tail.value)
+        order_list.add(5)
+        order_list.add(8)
+        order_list.add(7)
+        order_list.add(9)
+        order_list.add(3)
+        order_list.add(6)
+        order_list.add(4)
+        node = order_list.head
+        for i in range(11):
+            self.assertEqual(i, node.value)
+            node = node.next
+        order_list.add(-1)
+        order_list.add(-2)
+        print([i.value for i in order_list.get_all()])
+        order_list.clean(False)
+        for i in range(11):
+            order_list.add(i)
+        order_list.add(11)
+        order_list.add(-1)
+        print([i.value for i in order_list.get_all()])
+
+    def test_order_list_add_string(self):
+        order_list = ll.OrderedList(True)
+        for i in 'qwertyuiop':
+            order_list.add(i)
+        print([i.value for i in order_list.get_all()])
+
+        order_list.clean(False)
+        for i in 'qwertyuiop':
+            order_list.add(i)
+        print([i.value for i in order_list.get_all()])
+
+
 if __name__ == '__main__':
     unittest.main()

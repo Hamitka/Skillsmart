@@ -274,3 +274,105 @@ class LinkedList2:
             item.next = self.head
         self.head = item
 
+
+class OrderedList:
+    def __init__(self, asc):
+        self.head = None
+        self.tail = None
+        self.__ascending = asc
+
+    def compare(self, v1, v2):
+        """
+        2. Метод сравнения двух значений compare().
+        В общем случае, мы можем хранить в нашем списке произвольные объекты
+        (например, экземпляры класса Cat), и способ, которым мы желаем их сравнивать,
+        потенциально может быть самым произвольным.
+        Пока сделайте базовый вариант этого метода, который сравнивает числовые значения.
+        """
+        if v1 < v2:
+            return -1
+        elif v1 == v2:
+            return 0
+        else:
+            return 1
+
+    def add(self, value):
+        item = Node(value)
+        if self.head is None:
+            self.head = item
+            item.prev = None
+            item.next = None
+            self.tail = item
+            return
+        node = self.head
+        if (self.__ascending and value <= node.value) or (not self.__ascending and value >= node.value):
+            self.head = item
+            item.next = node
+            node.prev = item
+            return
+        while node:
+            if node.next and ((self.__ascending and node.value <= value <= node.next.value) or (
+                    not self.__ascending and node.value >= value >= node.next.value)):
+                item.next = node.next
+                item.prev = node
+                if node.next: node.next.prev = item
+                node.next = item
+                return
+            elif node == self.tail:
+                self.tail.next = item
+                item.prev = self.tail
+                self.tail = item
+                return
+            node = node.next
+        # автоматическая вставка value
+        # в нужную позицию
+
+    def find(self, val):
+        node = self.head
+        while node:
+            if node.value == val:
+                return node
+            elif self.__ascending and node.value > val:
+                return None
+            elif not self.__ascending and node.value < val:
+                return None
+            node = node.next
+        return None
+
+    def delete(self, val):
+        pass  # здесь будет ваш код
+
+    def clean(self, asc):
+        # self.__ascending = asc
+        self.__init__(asc)
+
+    def len(self):
+        i = 0
+        node = self.head
+        while node is not None:
+            i += 1
+            node = node.next
+        return i
+
+    def get_all(self):
+        r = []
+        node = self.head
+        while node is not None:
+            r.append(node)
+            node = node.next
+        return r
+
+    # def print_all_nodes(self):
+    #     node = self.head
+    #     while node is not None:
+    #         print(node.value)
+    #         node = node.next
+
+
+class OrderedStringList(OrderedList):
+    def __init__(self, asc):
+        super(OrderedStringList, self).__init__(asc)
+
+    def compare(self, v1, v2):
+        # переопределённая версия для строк
+        return 0
