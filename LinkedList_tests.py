@@ -331,6 +331,8 @@ class MyTestCaseOrderList(unittest.TestCase):
             order_list.add(i)
         print([i.value for i in order_list.get_all()])
         print(f'compare: {order_list.compare(order_list.head.value, order_list.tail.value)}')
+        order_list.delete('i')
+        print([i.value for i in order_list.get_all()])
 
 
 if __name__ == '__main__':

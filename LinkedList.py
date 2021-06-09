@@ -347,6 +347,19 @@ class OrderedList:
             if not all:
                 return None
 
+        node = self.head
+        while node is not None:
+            if node.value == val:
+                node.prev.next = node.next
+                if node.next: node.next.prev = node.prev
+                if self.head is None: self.tail = None
+                if node == self.tail: self.tail = node.prev
+                if not all:
+                    return None
+
+            node = node.next
+        return None
+
     def clean(self, asc):
         # self.__ascending = asc
         self.__init__(asc)
