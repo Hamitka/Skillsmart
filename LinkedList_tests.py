@@ -302,37 +302,52 @@ class MyTestCaseOrderList(unittest.TestCase):
         order_list.add(3)
         order_list.add(6)
         order_list.add(4)
+        list_model = [i for i in range(11)]
         node = order_list.head
         for i in range(11):
             self.assertEqual(i, node.value)
             node = node.next
+        self.assertEqual(list_model, [i.value for i in order_list.get_all()])
         order_list.add(-1)
         order_list.add(-2)
-        print([i.value for i in order_list.get_all()])
-        print(f'compare: {order_list.compare(order_list.head.value, order_list.tail.value)}')
+        # print([i.value for i in order_list.get_all()])
+        # print(f'compare: {order_list.compare(order_list.head.value, order_list.tail.value)}')
+        self.assertEqual(-1, order_list.compare(order_list.head.value, order_list.tail.value))
 
         order_list.clean(False)
         for i in range(11):
             order_list.add(i)
+
+        self.assertEqual(list_model[::-1], [i.value for i in order_list.get_all()])
         order_list.add(11)
         order_list.add(-1)
-        print([i.value for i in order_list.get_all()])
-        print(f'compare: {order_list.compare(order_list.head.value, order_list.tail.value)}')
+        # print([i.value for i in order_list.get_all()])
+        # print(f'compare: {order_list.compare(order_list.head.value, order_list.tail.value)}')
+        self.assertEqual(1, order_list.compare(order_list.head.value, order_list.tail.value))
 
     def test_order_list_add_string(self):
         order_list = ll.OrderedStringList(True)
-        for i in 'qwertyuiop':
+        some_string = 'qwertyuiop'
+        for i in some_string:
             order_list.add(i)
-        print([i.value for i in order_list.get_all()])
-        print(f'compare: {order_list.compare(order_list.head.value, order_list.tail.value)}')
+        list_model = [i for i in some_string]
+        list_model.sort()
+        # print([i.value for i in order_list.get_all()])
+        # print(f'compare: {order_list.compare(order_list.head.value, order_list.tail.value)}')
+        self.assertEqual(list_model, [i.value for i in order_list.get_all()])
+        self.assertEqual(-1, order_list.compare(order_list.head.value, order_list.tail.value))
 
         order_list.clean(False)
-        for i in 'qwertyuiop':
+        for i in some_string:
             order_list.add(i)
-        print([i.value for i in order_list.get_all()])
-        print(f'compare: {order_list.compare(order_list.head.value, order_list.tail.value)}')
+        # print([i.value for i in order_list.get_all()])
+        # print(f'compare: {order_list.compare(order_list.head.value, order_list.tail.value)}')
+        self.assertEqual(list_model[::-1], [i.value for i in order_list.get_all()])
+        self.assertEqual(1, order_list.compare(order_list.head.value, order_list.tail.value))
         order_list.delete('i')
-        print([i.value for i in order_list.get_all()])
+        list_model.remove('i')
+        # print([i.value for i in order_list.get_all()])
+        self.assertEqual(list_model[::-1], [i.value for i in order_list.get_all()])
 
 
 if __name__ == '__main__':
