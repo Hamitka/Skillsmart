@@ -112,11 +112,11 @@ class PowerSet:
     def __init__(self):
         # ваша реализация хранилища
         self.values = []
-        self.size = 0
+        self.length = 0
 
     def size(self):
         # количество элементов в множестве
-        return self.size
+        return self.length
 
     def put(self, value):
         # всегда срабатывает
@@ -125,10 +125,10 @@ class PowerSet:
             if not self.values or value > self.values[-1]:
                 self.values.append(value)
             else:
-                while value > self.values[i] and i < self.size:
+                while value > self.values[i] and i < self.length:
                     i += 1
                 self.values.insert(i, value)
-            self.size += 1
+            self.length += 1
 
     def get(self, value):
         # возвращает True если value имеется в множестве,
@@ -145,7 +145,7 @@ class PowerSet:
         # иначе False
         if value in self.values:
             self.values.remove(value)
-            self.size -= 1
+            self.length -= 1
             return True
         return False
 

@@ -44,7 +44,7 @@ class MyTestCase(unittest.TestCase):
         my_set.put(2)
         my_set.put(6)
         my_set.put(5)
-        self.assertEqual(5, my_set.size)
+        self.assertEqual(5, my_set.size())
         self.assertEqual([1, 2, 3, 5, 6], my_set.values)
         my_set.put(5)
         self.assertEqual([1, 2, 3, 5, 6], my_set.values)
@@ -74,7 +74,7 @@ class MyTestCase(unittest.TestCase):
 
         for i in range(10000, 15000):
             my_set_5.remove(i)
-
+        print(my_set_5.size())
 
 
 
