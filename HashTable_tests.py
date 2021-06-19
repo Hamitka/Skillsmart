@@ -37,6 +37,48 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual('value555', my_dict.get('key5'))
         self.assertEqual(None, my_dict.get('key555'))
 
+    def test_power_set(self):
+        my_set = ht.PowerSet()
+        my_set.put(1)
+        my_set.put(3)
+        my_set.put(2)
+        my_set.put(6)
+        my_set.put(5)
+        self.assertEqual(5, my_set.size)
+        self.assertEqual([1, 2, 3, 5, 6], my_set.values)
+        my_set.put(5)
+        self.assertEqual([1, 2, 3, 5, 6], my_set.values)
+        my_set_2 = ht.PowerSet()
+        for i in range(5):
+            my_set_2.put(i)
+        self.assertEqual(False, my_set.issubset(my_set_2))
+        my_set.put(0)
+        my_set.put(4)
+        self.assertEqual(True, my_set.issubset(my_set_2))
+        self.assertEqual(False, my_set_2.issubset(my_set))
+
+        my_set.remove(0)
+        self.assertEqual([1, 2, 3, 4, 5, 6], my_set.values)
+        self.assertEqual([1, 2, 3, 4], my_set.intersection(my_set_2).values)
+        my_set_3 = ht.PowerSet()
+        my_set_3.put(10)
+        my_set_3.put(11)
+        self.assertEqual([], my_set.intersection(my_set_3).values)
+        self.assertEqual([1, 2, 3, 4, 5, 6, 10, 11], my_set.union(my_set_3).values)
+        my_set_4 = ht.PowerSet()
+        self.assertEqual([1, 2, 3, 4, 5, 6], my_set.union(my_set_4).values)
+
+        my_set_5 = ht.PowerSet()
+        for i in range(25000):
+            my_set_5.put(i)
+
+        for i in range(10000, 15000):
+            my_set_5.remove(i)
+
+
+
+
+
 
 
 if __name__ == '__main__':

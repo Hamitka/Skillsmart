@@ -18,7 +18,7 @@ class HashTable:
         # в качестве value поступают строки!
         # всегда возвращает корректный индекс слота
         # return hash(value) % self.size
-        return sum([ord(value[i]) * (i+1) for i in range(len(value))]) % self.size
+        return sum([ord(value[i]) * (i + 1) for i in range(len(value))]) % self.size
 
     def seek_slot(self, value):
         """
@@ -71,7 +71,7 @@ class NativeDictionary:
     def hash_fun(self, key):
         # в качестве key поступают строки!
         # всегда возвращает корректный индекс слота
-        return sum([ord(key[i]) * (i+1) for i in range(len(key))]) % self.size
+        return sum([ord(key[i]) * (i + 1) for i in range(len(key))]) % self.size
         # return sum(key.encode('utf-8')) % self.size
 
     def is_key(self, key):
@@ -103,3 +103,93 @@ class NativeDictionary:
         if self.is_key(key):
             return self.values[self.hash_fun(key)]
         return None
+
+
+# наследуйте этот класс от HashTable
+# или расширьте его методами из HashTable
+class PowerSet:
+
+    def __init__(self):
+        # ваша реализация хранилища
+        self.values = []
+        self.size = 0
+
+    def size(self):
+        # количество элементов в множестве
+        return self.size
+
+    def put(self, value):
+        # всегда срабатывает
+        i = 0
+        if value not in self.values:
+            if not self.values or value > self.values[-1]:
+                self.values.append(value)
+            else:
+                while value > self.values[i] and i < self.size:
+                    i += 1
+                self.values.insert(i, value)
+            self.size += 1
+
+    def get(self, value):
+        # возвращает True если value имеется в множестве,
+        # иначе False
+        if value in self.values:
+            return True
+        return False
+
+    def remove(self, value):
+        """
+        - remove(значение) -- удаление элемента из множества;
+        """
+        # возвращает True если value удалено
+        # иначе False
+        if value in self.values:
+            self.values.remove(value)
+            self.size -= 1
+            return True
+        return False
+
+    def intersection(self, set2):
+        """
+        - intersection(), в качестве параметра выступает другое множество,
+        а возвращается пересечение этих множеств (множество,
+        в котором есть только те элементы, которые имеются в каждом из множеств);
+        """
+        # пересечение текущего множества и set2
+        set_intersection = PowerSet()
+        [set_intersection.put(i) for i in self.values if i in set2.values]
+        return set_intersection
+
+    def union(self, set2):
+        """
+        - union(), в качестве параметра выступает другое множество,
+        а возвращается объединение этих множеств
+        (множество, в котором есть все элементы из каждого множества);
+        """
+        # объединение текущего множества и set2
+        set_union = PowerSet()
+        [set_union.put(i) for i in self.values]
+        [set_union.put(i) for i in set2.values]
+        return set_union
+
+    def difference(self, set2):
+        """
+        - difference(), в качестве параметра выступает другое множество,
+        а возвращается подмножество текущего множества из таких элементов,
+        которые не входят в множество-параметр;
+        """
+        # разница текущего множества и set2
+        set_difference = PowerSet()
+        [set_difference.put(i) for i in self.values if i not in set2.values]
+        return None
+
+    def issubset(self, set2):
+        """
+        - issubset(), в качестве параметра выступает другое множество,
+        и проверяется, входят ли все его элементы в текущее множество
+        (будет ли множество-параметр подмножеством текущего множества).
+        """
+        # возвращает True, если set2 есть
+        # подмножество текущего множества,
+        # иначе False
+        return all(i in self.values for i in set2.values)
