@@ -181,7 +181,7 @@ class PowerSet:
         # разница текущего множества и set2
         set_difference = PowerSet()
         [set_difference.put(i) for i in self.values if i not in set2.values]
-        return None
+        return set_difference
 
     def issubset(self, set2):
         """
