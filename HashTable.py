@@ -193,3 +193,40 @@ class PowerSet:
         # подмножество текущего множества,
         # иначе False
         return all(i in self.values for i in set2.values)
+
+
+class BloomFilter:
+
+    def __init__(self, f_len):
+        self.filter_len = f_len
+        self.__bitarray__ = [0] * self.filter_len
+
+    def hash1(self, str1):
+        # 17
+        # реализация ...
+        return sum([(ord(str1[i]) * ((i + 17) << i)) for i in range(len(str1))]) % self.filter_len
+
+    def hash2(self, str1):
+        # 223
+        # ...
+        result = len(str1)
+        for i in range(len(str1)):
+            result = result * 223 + ord(str1[i])
+        return result % self.filter_len
+        # return sum([(ord(str1[i]) + 223) << i for i in range(len(str1))]) % self.filter_len
+        # return (hash(str1) + 223) % self.filter_len
+
+    def add(self, str1):
+        # добавляем строку str1 в фильтр
+        i_hash1 = self.hash1(str1)
+        i_hash2 = self.hash2(str1)
+        self.__bitarray__[i_hash1] = 1
+        self.__bitarray__[i_hash2] = 1
+
+    def is_value(self, str1):
+        # проверка, имеется ли строка str1 в фильтре
+        i_hash1 = self.hash1(str1)
+        i_hash2 = self.hash2(str1)
+        if self.__bitarray__[i_hash1] == 1 and self.__bitarray__[i_hash1] == 1:
+            return True
+        return False

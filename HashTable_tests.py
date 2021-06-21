@@ -76,9 +76,20 @@ class MyTestCase(unittest.TestCase):
             my_set_5.remove(i)
         print(my_set_5.size())
 
-
-
-
+    def test_bloom_filter(self):
+        my_bloom_filter = ht.BloomFilter(32)
+        some_string = '0123456789'
+        # my_bloom_filter.add(some_string)
+        # print(my_bloom_filter.is_value('some_string'))
+        print(my_bloom_filter.__bitarray__)
+        for i in range(len(some_string)):
+            str_rotate = some_string[i::] + some_string[:i:]
+            print(str_rotate, my_bloom_filter.is_value(str_rotate))
+            my_bloom_filter.add(str_rotate)
+        print(my_bloom_filter.__bitarray__)
+        for i in range(len(some_string)):
+            str_rotate = some_string[i::] + some_string[:i:]
+            print(str_rotate, my_bloom_filter.is_value(str_rotate))
 
 
 if __name__ == '__main__':
