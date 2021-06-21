@@ -227,6 +227,6 @@ class BloomFilter:
         # проверка, имеется ли строка str1 в фильтре
         i_hash1 = self.hash1(str1)
         i_hash2 = self.hash2(str1)
-        if self.__bitarray__[i_hash1] == 1 and self.__bitarray__[i_hash1] == 1:
+        if self.__bitarray__[i_hash1] == 1 and self.__bitarray__[i_hash2] == 1:
             return True
         return False
