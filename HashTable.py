@@ -209,11 +209,11 @@ class BloomFilter:
     def hash2(self, str1):
         # 223
         # ...
-        result = len(str1)
-        for i in range(len(str1)):
-            result = result * 223 + ord(str1[i])
-        return result % self.filter_len
-        # return sum([(ord(str1[i]) + 223) << i for i in range(len(str1))]) % self.filter_len
+        # result = len(str1)
+        # for i in range(len(str1)):
+        #     result = result * 223 + ord(str1[i])
+        # return result % self.filter_len
+        return sum([(ord(str1[i]) + 223) << i % 8 for i in range(len(str1))]) % self.filter_len
         # return (hash(str1) + 223) % self.filter_len
 
     def add(self, str1):
