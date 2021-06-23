@@ -91,6 +91,22 @@ class MyTestCase(unittest.TestCase):
             str_rotate = some_string[i::] + some_string[:i:]
             print(str_rotate, my_bloom_filter.is_value(str_rotate))
 
+    def test_native_cache(self):
+        my_native_cache = ht.NativeCache(17)
+        for i in range(71):
+            my_native_cache.put('key' + str(i), 'val' + str(i))
+        my_native_cache.get('key1')
+        my_native_cache.get('key1')
+        my_native_cache.get('key2')
+        my_native_cache.get('key3')
+        my_native_cache.put('key17', 'val17')
+        my_native_cache.get('key17')
+        my_native_cache.put('key18', 'val18')
+
+        print(my_native_cache.slots)
+        print(my_native_cache.values)
+        print(my_native_cache.hits)
+
 
 if __name__ == '__main__':
     unittest.main()

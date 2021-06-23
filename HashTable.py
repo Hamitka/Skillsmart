@@ -230,3 +230,72 @@ class BloomFilter:
         if self.__bitarray__[i_hash1] == 1 and self.__bitarray__[i_hash2] == 1:
             return True
         return False
+
+
+class NativeCache:
+    """
+    Реализуйте на основе словаря новый класс NativeCache,
+    который дополнительно будет учитывать количество обращений к каждому ключу.
+    Когда хэш-таблица заполняется и найти свободное место не удаётся,
+    вытесняйте элемент с наименьшим количеством обращений.
+    Для этого в дополнение к self.values и self.slots заведите массив self.hits,
+    который будет хранить соответствующие количества обращений.
+    """
+
+    def __init__(self, size):
+        self.size = size
+        self.slots = [None] * self.size
+        self.values = [None] * self.size
+        self.hits = [0] * self.size
+        self.step = 3
+
+    def hash_fun(self, key):
+        return sum([(ord(key[i]) * ((i + 223) << i)) for i in range(len(key))]) % self.size
+
+    def seek_slot(self, key):
+        """
+        - функцию поиска слота seek_slot(value),
+        которая по входному значению сперва рассчитывает индекс хэш-функцией,
+        а затем отыскивает подходящий слот для него с учётом коллизий,
+        или возвращает None, если это не удалось;
+        """
+        # находит индекс пустого слота для значения, или None
+        slot_candidate = self.hash_fun(key)
+
+        while None in self.slots:
+            if self.slots[slot_candidate] is None or self.slots[slot_candidate] == key:
+                return slot_candidate
+            else:
+                slot_candidate = (slot_candidate + self.step) % self.size
+        return None
+
+    def put(self, key, value):
+        """
+        - put(key, value) - сохранение внутри класса ассоциативного массива
+        пары ключ-значениепо описанной выше схеме;"""
+        if self.seek_slot(key) is not None:
+            index = self.seek_slot(key)
+        else:
+            index = self.free()
+        self.slots[index] = key
+        self.values[index] = value
+        self.hits[index] += 1
+
+    def get(self, key):
+        """
+        - get(key) - поиск и извлечение значения по ключу, или None, если ключ не найден.
+        """
+        # возвращает value для key,
+        # или None если ключ не найден
+        if key in self.slots:
+            index = self.slots.index(key)
+            self.hits[index] += 1
+            return self.values[index]
+        return None
+
+    def free(self):
+        index = self.hits.index(min(self.hits))
+        self.slots[index] = None
+        self.values[index] = None
+        self.hits[index] = 0
+        return index
